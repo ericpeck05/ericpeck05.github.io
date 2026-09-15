@@ -310,6 +310,9 @@
       <div>
         <h3>Lynch-style stock screener</h3>
         <p class="meta">Python, yfinance, pandas</p>
+        <p class="project-links">
+          <a href="https://github.com/ericpeck05/lynch-screener">Source on GitHub</a>
+        </p>
       </div>
       <div>
         <p class="body">
@@ -317,6 +320,43 @@
           measured against the multiple, debt load, and whether the business is simple enough to
           explain. It pulls fundamentals, ranks what comes back, and leaves me with a short list
           worth reading in full rather than a wall of tickers.
+        </p>
+      </div>
+    </article>
+
+    <article class="project">
+      <div>
+        <h3>AI sector valuation tool</h3>
+        <p class="meta">Python, Streamlit, DCF and comparables</p>
+      </div>
+      <div>
+        <p class="body">
+          A two-stage DCF with a comparables cross-check and a sensitivity grid across WACC and
+          terminal growth, pointed at the large-cap AI names. I built it to answer a question I kept
+          arguing about with people, which is whether the sector is expensive, in a way that forced me
+          to write down my assumptions instead of gesturing at them.
+        </p>
+        <p class="project-links">
+          <a href="https://github.com/ericpeck05/bubble-or-not">Source on GitHub</a>
+        </p>
+      </div>
+    </article>
+
+    <article class="project">
+      <div>
+        <h3>Data center site finder</h3>
+        <p class="meta">Python, SpatiaLite, public county and USGS data</p>
+      </div>
+      <div>
+        <p class="body">
+          Scores every parcel in Dane County for behind-the-meter data center development: size,
+          slope, zoning, land use, building coverage, and distance to a substation, weighted into one
+          number out of 100 and drawn on a map. Power availability is the real constraint on the AI
+          buildout, and working through the siting problem with public data taught me more about that
+          than reading about it did.
+        </p>
+        <p class="project-links">
+          <a href="https://github.com/ericpeck05/btm-site-finder">Source on GitHub</a>
         </p>
       </div>
     </article>
@@ -339,12 +379,71 @@
       <div>
         <h3>Grid trading bot</h3>
         <p class="meta">Python, Coinbase Advanced Trade API</p>
+        <p class="project-links">
+          <a href="https://github.com/ericpeck05/sol-grid-bot">SOL grid bot on GitHub</a>
+          <a href="https://github.com/ericpeck05/binance-grid-bot">Binance version (no dependencies)</a>
+        </p>
       </div>
       <div>
         <p class="body">
           A strategy that ladders buy and sell orders across a price range and works the grid as
           price moves through it. I built it to see how execution costs, fees, and slippage chew
           through a strategy that looks clean in a backtest. That gap is the actual lesson.
+        </p>
+      </div>
+    </article>
+
+    <article class="project">
+      <div>
+        <h3>Crypto signal research bot</h3>
+        <p class="meta">Python, SQLite, scikit-learn</p>
+      </div>
+      <div>
+        <p class="body">
+          Collects perpetual futures funding rates, on-chain metrics and social sentiment on a
+          schedule, turns each into a z-score so they are comparable, and blends them into one
+          directional signal per asset. It trains and backtests on that signal, and routes orders only
+          through a risk layer with position caps, stops, a daily loss limit and a drawdown kill switch.
+          Most of the work was the risk layer, which was the lesson.
+        </p>
+        <p class="project-links">
+          <a href="https://github.com/ericpeck05/crypto-signal-bot">Source on GitHub</a>
+        </p>
+      </div>
+    </article>
+
+    <article class="project">
+      <div>
+        <h3>Atlas</h3>
+        <p class="meta">Python, local-first, no dependencies</p>
+      </div>
+      <div>
+        <p class="body">
+          A map of my projects, notes, files and calendar in one view that runs entirely on my own
+          machine. Everything I was working on lived in a different place and none of those places knew
+          about each other. Rather than move my life into somebody's server, I built something that
+          reaches out to where things already are and stores its state as JSON I can read.
+        </p>
+        <p class="project-links">
+          <a href="https://github.com/ericpeck05/atlas">Source on GitHub</a>
+        </p>
+      </div>
+    </article>
+
+    <article class="project">
+      <div>
+        <h3>Multi-agent group chat</h3>
+        <p class="meta">Next.js, TypeScript, local Ollama models</p>
+      </div>
+      <div>
+        <p class="body">
+          A group chat with a roster of AI agents that hold different views, plus a moderator that
+          deliberately pulls in whoever disagrees with what you just said. One assistant tends to agree
+          with you, which is the opposite of useful when you are testing a thesis. It runs against a
+          model on my own machine, so nothing leaves the laptop.
+        </p>
+        <p class="project-links">
+          <a href="https://github.com/ericpeck05/local-agent-group-chat">Source on GitHub</a>
         </p>
       </div>
     </article>
