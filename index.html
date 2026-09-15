@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eric Peck</title>
+<meta name="description" content="Eric Peck, finance student at UW-Madison. Portfolio of investing tools, market dashboards, and client analysis work.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --paper:     #E7EBEC;
+    --raised:    #F4F6F6;
+    --ink:       #14283A;
+    --ink-soft:  #566876;
+    --pine:      #1D5B48;
+    --rule:      #C7CFD2;
+
+    --serif: "Newsreader", Georgia, serif;
+    --sans:  "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+
+    --measure: 62ch;
+    --gutter: clamp(1.25rem, 5vw, 5rem);
+  }
+
+  * { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: clamp(1.0625rem, 0.35vw + 1rem, 1.1875rem);
+    line-height: 1.65;
+    font-weight: 400;
+  }
+
+  a { color: inherit; }
+
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--pine);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  .wrap {
+    max-width: 68rem;
+    margin: 0 auto;
+    padding-inline: var(--gutter);
+  }
+
+  /* ---------- masthead ---------- */
+
+  .masthead {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2rem;
+    align-items: baseline;
+    justify-content: space-between;
+    padding-block: 2rem 0;
+  }
+
+  .nameplate {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+  }
+
+  .nav {
+    display: flex;
+    gap: 1.75rem;
+    font-family: var(--sans);
+    font-size: 0.9rem;
+  }
+
+  .nav a {
+    text-decoration: none;
+    color: var(--ink-soft);
+    padding-bottom: 2px;
+    border-bottom: 1px solid transparent;
+  }
+
+  .nav a:hover { color: var(--ink); border-bottom-color: var(--pine); }
+
+  /* ---------- hero ---------- */
+
+  .hero { padding-block: clamp(3.5rem, 9vw, 7rem) 0; }
+
+  .statement {
+    font-size: clamp(2rem, 5.2vw, 3.6rem);
+    line-height: 1.12;
+    font-weight: 300;
+    letter-spacing: -0.015em;
+    margin: 0;
+    max-width: 19ch;
+    text-wrap: balance;
+  }
+
+  .standfirst {
+    margin: 2rem 0 0;
+    max-width: 46ch;
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+  }
+
+  .standfirst strong { color: var(--ink); font-weight: 500; }
+
+  .curve {
+    display: block;
+    width: 100%;
+    height: clamp(70px, 11vw, 130px);
+    margin-top: clamp(2rem, 5vw, 3.5rem);
+    overflow: visible;
+  }
+
+  .curve path {
+    fill: none;
+    stroke: var(--pine);
+    stroke-width: 1.5;
+    vector-effect: non-scaling-stroke;
+    stroke-dasharray: 1600;
+    stroke-dashoffset: 1600;
+    animation: draw 2s cubic-bezier(.33,.9,.4,1) .25s forwards;
+  }
+
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+
+  /* ---------- sections ---------- */
+
+  .section { padding-block: clamp(3.5rem, 8vw, 6rem); }
+
+  .section-head {
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 0 0 2.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  /* ---------- projects ---------- */
+
+  .project {
+    display: grid;
+    grid-template-columns: 15rem 1fr;
+    gap: 1rem 3rem;
+    padding-block: 2.25rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .project:last-of-type { border-bottom: 0; }
+
+  .project h3 {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 1.2;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  .meta {
+    font-family: var(--sans);
+    font-size: 0.8125rem;
+    color: var(--ink-soft);
+    margin: 0.65rem 0 0;
+    line-height: 1.5;
+  }
+
+  .project p.body {
+    margin: 0;
+    max-width: var(--measure);
+  }
+
+  .project-links {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    margin-top: 1rem;
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .project-links a {
+    color: var(--pine);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(29, 91, 72, 0.35);
+    padding-bottom: 1px;
+  }
+
+  .project-links a:hover { border-bottom-color: var(--pine); }
+
+  /* ---------- about ---------- */
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 15rem 1fr;
+    gap: 1rem 3rem;
+  }
+
+  .about-body p {
+    max-width: var(--measure);
+    margin: 0 0 1.25rem;
+  }
+
+  .about-body p:last-child { margin-bottom: 0; }
+
+  .aside {
+    font-family: var(--sans);
+    font-size: 0.8125rem;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .aside span { display: block; color: var(--ink); }
+
+  /* ---------- contact ---------- */
+
+  .contact { background: var(--raised); }
+
+  .contact .wrap { padding-block: clamp(3rem, 7vw, 5rem); }
+
+  .contact h2 {
+    font-size: clamp(1.6rem, 3.5vw, 2.25rem);
+    font-weight: 300;
+    line-height: 1.2;
+    margin: 0 0 1.25rem;
+    max-width: 22ch;
+  }
+
+  .contact p { max-width: 46ch; color: var(--ink-soft); margin: 0 0 2rem; }
+
+  .channels {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1rem;
+    font-family: var(--sans);
+    font-size: 0.9rem;
+  }
+
+  .channels a {
+    text-decoration: none;
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    padding: 0.6rem 1.1rem;
+    border-radius: 3px;
+  }
+
+  .channels a:hover { border-color: var(--pine); color: var(--pine); }
+
+  footer {
+    font-family: var(--sans);
+    font-size: 0.8125rem;
+    color: var(--ink-soft);
+    padding-block: 2rem 3rem;
+  }
+
+  /* ---------- responsive ---------- */
+
+  @media (max-width: 720px) {
+    .project, .about-grid { grid-template-columns: 1fr; gap: 0.75rem; }
+    .project { padding-block: 2rem; }
+    .nav { gap: 1.25rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .curve path { animation: none; stroke-dashoffset: 0; }
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="masthead">
+    <a class="nameplate" href="#top">Eric Peck</a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#projects">Projects</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="top">
+    <h1 class="statement">I read annual reports for fun, then write code to make the reading faster.</h1>
+    <p class="standfirst">
+      Finance student at <strong>UW-Madison</strong>, concentrating in financial planning.
+      Last summer I built client analysis tools at a wealth management firm in Chicago.
+      I am looking for a 2027 summer analyst seat.
+    </p>
+
+    <svg class="curve" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+      <path d="M0,116 C180,113 340,105 520,88 C690,72 830,46 980,28 C1070,17 1140,8 1200,2"/>
+    </svg>
+  </section>
+
+  <section class="section" id="projects">
+    <h2 class="section-head">Projects</h2>
+
+    <article class="project">
+      <div>
+        <h3>Lynch-style stock screener</h3>
+        <p class="meta">Python, yfinance, pandas</p>
+      </div>
+      <div>
+        <p class="body">
+          A screen built around the things Peter Lynch actually paid attention to: earnings growth
+          measured against the multiple, debt load, and whether the business is simple enough to
+          explain. It pulls fundamentals, ranks what comes back, and leaves me with a short list
+          worth reading in full rather than a wall of tickers.
+        </p>
+      </div>
+    </article>
+
+    <article class="project">
+      <div>
+        <h3>Morning market dashboard</h3>
+        <p class="meta">HTML, CSS, JavaScript, live market data</p>
+      </div>
+      <div>
+        <p class="body">
+          One page I open before class. Index levels, sector moves, and the handful of names I
+          follow, arranged so nothing needs a click. I built it because checking five tabs every
+          morning was a worse use of ten minutes than reading was.
+        </p>
+      </div>
+    </article>
+
+    <article class="project">
+      <div>
+        <h3>Grid trading bot</h3>
+        <p class="meta">Python, Coinbase Advanced Trade API</p>
+      </div>
+      <div>
+        <p class="body">
+          A strategy that ladders buy and sell orders across a price range and works the grid as
+          price moves through it. I built it to see how execution costs, fees, and slippage chew
+          through a strategy that looks clean in a backtest. That gap is the actual lesson.
+        </p>
+      </div>
+    </article>
+
+    <article class="project">
+      <div>
+        <h3>Client reporting pipeline</h3>
+        <p class="meta">Python, python-pptx, python-docx</p>
+      </div>
+      <div>
+        <p class="body">
+          During my internship, portfolio review decks were assembled by hand from brokerage
+          exports. I wrote a workflow that reads the export and produces the deck plus the
+          companion write-up in firm brand, which turned an afternoon of formatting into a few
+          minutes and left more room for the analysis itself.
+        </p>
+      </div>
+    </article>
+
+    <article class="project">
+      <div>
+        <h3>NeuralOS</h3>
+        <p class="meta">Swift, SwiftUI, macOS</p>
+      </div>
+      <div>
+        <p class="body">
+          A macOS app I am building in SwiftUI, born out of running language models locally on my
+          own machine instead of sending everything to someone else's server.
+        </p>
+      </div>
+    </article>
+
+    <article class="project">
+      <div>
+        <h3>EZ Planters</h3>
+        <p class="meta">Seasonal planters and landscaping, North Shore</p>
+      </div>
+      <div>
+        <p class="body">
+          A small business I started and still run. I handle the design, the planting, the pricing,
+          and the invoicing, which has taught me more about managing a client relationship than any
+          case study has.
+        </p>
+      </div>
+    </article>
+  </section>
+
+  <section class="section" id="about">
+    <h2 class="section-head">About</h2>
+    <div class="about-grid">
+      <div>
+        <p class="aside">
+          <span>University of Wisconsin-Madison</span>
+          Personal Finance, Financial Planning concentration
+          <br><br>
+          <span>Previously</span>
+          UW-La Crosse, Dean's List
+          <br><br>
+          <span>Involved in</span>
+          Financial Planning Association, Delta Sigma Pi
+        </p>
+      </div>
+      <div class="about-body">
+        <p>
+          I am a fundamental investor before I am anything else. I hold for years rather than
+          quarters, I want to understand a business well enough to describe it to someone who has
+          never heard of it, and I would rather read the filing than the headline about the filing.
+        </p>
+        <p>
+          The code came second. Every tool here started as something tedious I was doing by hand,
+          and the useful part was never the program, it was learning exactly where my own process
+          was sloppy once I had to write it down as steps.
+        </p>
+        <p>
+          I am working toward a career in wealth management, where the interesting problem is not
+          picking securities in a vacuum but fitting a portfolio to a real person's life, their
+          taxes, their timeline, and what they actually intend to leave behind.
+        </p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <h2>If you are hiring for a 2027 summer analyst seat, I would like to talk.</h2>
+    <p>
+      I am also happy to hear from anyone building in this space, or from students who want to
+      compare notes on the financial planning track.
+    </p>
+    <div class="channels">
+      <a href="mailto:ericpeck05@gmail.com">ericpeck05@gmail.com</a>
+      <a href="https://www.linkedin.com/in/ericpeck28">LinkedIn</a>
+      <a href="https://github.com/ericpeck05">GitHub</a>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <footer>Built and maintained by Eric Peck, 2026.</footer>
+</div>
+
+</body>
+</html>
