@@ -687,7 +687,7 @@
       <div id="plot-wrap">
         <div class="plot" id="plot"></div>
         <div class="axis" id="axis"></div>
-        <p class="chart-note">Two further entries sit outside this window: the client reporting pipeline was built during a 2025 internship, and EZ Planters is an ongoing business rather than a build.</p>
+        <p class="chart-note">One further entry sits outside this window: the client reporting pipeline was built during a 2025 internship rather than in 2026.</p>
       </div>
 
       <div class="table-scroll" id="table-wrap" hidden>
@@ -975,25 +975,6 @@
       '</svg>';
   };
 
-  /* planters, designed and planted by hand */
-  ART.planters = function () {
-    var plant = function (x, s, d) {
-      return '<g class="anim-sway" style="animation-delay:' + d + 's" transform="translate(' + x + ',0) scale(' + s + ')">' +
-        '<path d="M0 150 C -6 122, -20 110, -30 100" class="art-cs"/>' +
-        '<path d="M0 150 C 6 120, 18 106, 30 98" class="art-cs"/>' +
-        '<path d="M0 150 C 0 118, 0 102, 0 78" class="art-cs"/>' +
-        '<ellipse cx="-33" cy="97" rx="12" ry="6" class="art-c" transform="rotate(-28 -33 97)"/>' +
-        '<ellipse cx="33" cy="95" rx="12" ry="6" class="art-c" transform="rotate(26 33 95)"/>' +
-        '<ellipse cx="0" cy="72" rx="8" ry="13" class="art-c"/>' +
-        '</g>';
-    };
-    return '<svg viewBox="0 0 320 240" role="img" aria-label="A planted container of seasonal greenery">' +
-      plant(96, 0.92, 0) + plant(160, 1.05, 0.9) + plant(224, 0.88, 1.8) +
-      '<path d="M70 152 L250 152 L234 216 L86 216 Z" class="art-mute" style="opacity:.8"/>' +
-      '<line x1="70" y1="167" x2="246" y2="167" class="art-line"/>' +
-      '</svg>';
-  };
-
   /* =========================================================
      DATA
      ========================================================= */
@@ -1002,7 +983,7 @@
     { key: "investing", label: "Investing tools",        series: "var(--s-1)" },
     { key: "trading",   label: "Trading systems",        series: "var(--s-2)" },
     { key: "software",  label: "Software & tooling",     series: "var(--s-3)" },
-    { key: "business",  label: "Business & client work", series: "var(--s-4)" }
+    { key: "business",  label: "Client work",            series: "var(--s-4)" }
   ];
 
   var CHART_CATS = ["investing", "trading", "software"];
@@ -1079,13 +1060,6 @@
       does: "Reads a brokerage export and produces the portfolio review deck and its companion write-up in firm brand, turning an afternoon into a few minutes.",
       meta: "Python · python-pptx · python-docx",
       body: "During my internship, portfolio review decks were assembled by hand from brokerage exports. I wrote a workflow that reads the export and produces the deck plus the companion write-up in firm brand, which turned an afternoon of formatting into a few minutes and left more room for the analysis itself.",
-      links: []
-    },
-    {
-      title: "EZ Planters", art: "planters", cat: "business", date: null,
-      does: "A seasonal planter and landscaping business I started and still run, from design and planting through pricing and invoicing.",
-      meta: "North Shore · design, planting, pricing, invoicing",
-      body: "A small business I started and still run. I handle the design, the planting, the pricing, and the invoicing, which has taught me more about managing a client relationship than any case study has.",
       links: []
     }
   ];
@@ -1436,7 +1410,7 @@
 
   var emptyNote = document.createElement("p");
   emptyNote.className = "empty-note";
-  emptyNote.textContent = "No dated builds in this category. The entries below sit outside the 2026 window.";
+  emptyNote.textContent = "No dated builds in this category. The entry below sits outside the 2026 window.";
   emptyNote.hidden = true;
   plotWrap.insertBefore(emptyNote, plotWrap.firstChild);
 
