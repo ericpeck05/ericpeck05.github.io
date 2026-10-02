@@ -41,10 +41,10 @@
     --s1: 0.25rem; --s2: 0.5rem;  --s3: 0.75rem; --s4: 1rem;
     --s5: 1.5rem; --s6: 2rem;     --s7: 3rem;    --s8: 4.5rem; --s9: 7rem;
 
-    --measure: 62ch;
-    --gutter: clamp(1.5rem, 5vw, 6rem);
-    --maxw: 68rem;
-    --rail: 7.5rem;
+    --measure: 60ch;
+    --gutter: clamp(1.5rem, 4vw, 4.5rem);
+    --maxw: 104rem;
+    --rail: 9rem;
     --ease: cubic-bezier(0.22, 0.68, 0.25, 1);
   }
 
@@ -85,7 +85,10 @@
   /* ---------- base ---------- */
 
   * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  html {
+    -webkit-text-size-adjust: 100%; scroll-behavior: smooth;
+    font-size: clamp(100%, 0.42vw + 0.6rem, 125%);
+  }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
   body {
@@ -172,8 +175,8 @@
     gap: var(--s5) var(--s6);
     align-items: start;
   }
-  @media (max-width: 820px) {
-    .rail { grid-template-columns: 1fr; gap: var(--s3); }
+  @media (max-width: 1120px) {
+    .rail { grid-template-columns: 1fr; gap: var(--s4); }
   }
 
   /* ---------- hero ---------- */
@@ -182,9 +185,9 @@
 
   .statement {
     font-family: var(--serif); font-weight: 300;
-    font-size: clamp(2.3rem, 6.1vw, 4.6rem);
-    line-height: 1.045; letter-spacing: -0.028em;
-    margin: 0 0 var(--s6); max-width: 19ch;
+    font-size: clamp(2.3rem, 5.5vw, 5.6rem);
+    line-height: 1.03; letter-spacing: -0.03em;
+    margin: 0; max-width: 21ch;
     text-wrap: balance;
   }
   .statement em { font-style: italic; }
@@ -196,16 +199,25 @@
   }
   .lede strong { color: var(--ink); font-weight: 400; }
 
-  .facts {
-    margin-top: clamp(2.5rem, 6vw, 4.5rem);
-    border-top: 1px solid var(--rule);
-    padding-top: var(--s5);
+  .hero-lower {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
-    gap: var(--s5) var(--s6);
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: var(--s6) clamp(2rem, 6vw, 7rem);
+    align-items: start;
+    margin-top: clamp(2rem, 4vw, 3.5rem);
   }
-  .facts div { display: flex; flex-direction: column; gap: var(--s2); }
+
+  .facts { margin: 0; border-bottom: 1px solid var(--rule); }
+  .facts div {
+    display: grid; grid-template-columns: 6.5rem minmax(0, 1fr);
+    gap: var(--s4); align-items: baseline;
+    padding-block: var(--s3); border-top: 1px solid var(--rule);
+  }
   .facts .v { font-size: 1rem; line-height: 1.4; }
+
+  @media (max-width: 820px) {
+    .hero-lower { grid-template-columns: 1fr; }
+  }
 
   .line { display: block; overflow: hidden; }
   .line > span { display: block; }
@@ -232,14 +244,25 @@
   .featured { margin-top: var(--s8); }
   .featured + .featured { margin-top: clamp(3.5rem, 8vw, 6rem); }
 
-  .fig { background: none; border: 0; margin: 0 0 var(--s6); max-width: 34rem; }
+  .f-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+    gap: var(--s6) clamp(2rem, 6vw, 7rem);
+    align-items: start;
+  }
+  .fig { background: none; border: 0; margin: 0; padding-top: var(--s2); }
   .fig svg { display: block; width: 100%; height: auto; }
+
+  @media (max-width: 820px) {
+    .f-grid { grid-template-columns: 1fr; }
+    .fig { order: -1; max-width: 34rem; padding-top: 0; }
+  }
 
   .f-title {
     font-family: var(--serif); font-weight: 400;
     font-size: clamp(1.5rem, 2.4vw, 2rem);
     line-height: 1.12; letter-spacing: -0.016em;
-    margin: var(--s2) 0 var(--s4);
+    margin: 0 0 var(--s4);
   }
 
   .f-does {
@@ -267,17 +290,24 @@
 
   /* ---------- the index of everything else ---------- */
 
-  .index-list { margin-top: var(--s6); }
+  .index-list {
+    margin-top: var(--s6);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: clamp(2rem, 6vw, 7rem);
+    border-bottom: 1px solid var(--rule-2);
+  }
+  @media (max-width: 820px) { .index-list { grid-template-columns: 1fr; } }
 
   .entry {
     display: grid;
     grid-template-columns: 4rem minmax(0, 1fr) auto;
     gap: var(--s4) var(--s5);
-    align-items: center;
+    align-items: start;
     padding-block: var(--s5);
     border-top: 1px solid var(--rule-2);
   }
-  .entry:last-child { border-bottom: 1px solid var(--rule-2); }
+  .entry .glyph { margin-top: var(--s1); }
 
   .entry .glyph { width: 56px; height: 42px; }
   .entry .glyph svg { display: block; width: 100%; height: 100%; }
@@ -391,7 +421,17 @@
   .about-body p:last-child { margin-bottom: 0; }
   .about-body p:first-child { font-size: clamp(1.15rem, 0.5vw + 1rem, 1.4rem); line-height: 1.5; }
 
+  .split {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+    gap: var(--s7) clamp(2rem, 6vw, 7rem);
+    align-items: start;
+  }
+  .split.is-end { align-items: end; }
+  @media (max-width: 820px) { .split { grid-template-columns: 1fr; } .split.is-end { align-items: start; } }
+
   .cv { margin: 0; }
+  .cv-label { margin-bottom: var(--s4); }
   .cv dt { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); margin-top: var(--s5); }
   .cv dt:first-child { margin-top: 0; }
   .cv dd { margin: var(--s2) 0 0; font-size: 0.95rem; line-height: 1.5; }
@@ -403,9 +443,10 @@
     font-size: clamp(1.6rem, 3.4vw, 2.6rem); line-height: 1.16;
     letter-spacing: -0.022em; margin: 0 0 var(--s4); max-width: 22ch; text-wrap: balance;
   }
-  .contact p { max-width: 44ch; margin: 0 0 var(--s6); color: var(--ink-2); }
+  .contact p { max-width: 44ch; margin: 0; color: var(--ink-2); }
 
-  .channels { display: flex; flex-wrap: wrap; gap: var(--s5); }
+  .channels { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s4); }
+  @media (max-width: 820px) { .channels { flex-direction: row; flex-wrap: wrap; gap: var(--s5); } }
   .channels a {
     font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.04em;
     text-decoration: none; color: var(--ink);
@@ -487,18 +528,19 @@
           <span class="line"><span>for fun, then write code</span></span>
           <span class="line"><span>to make the reading <em>faster</em>.</span></span>
         </h1>
-        <p class="lede">
-          Finance student at <strong>UW-Madison</strong>, concentrating in financial planning.
-          Last summer I built client analysis tools at a wealth management firm in Chicago.
-          I am looking for a 2027 summer analyst seat.
-        </p>
+        <div class="hero-lower">
+          <p class="lede">
+            Finance student at <strong>UW-Madison</strong>, concentrating in financial planning.
+            Last summer I built client analysis tools at a wealth management firm in Chicago.
+            I am looking for a 2027 summer analyst seat.
+          </p>
+          <div class="facts">
+            <div><span class="label">Focus</span><span class="v">Fundamental, long-horizon investing</span></div>
+            <div><span class="label">Building</span><span class="v">Screeners, valuation and trading tools</span></div>
+            <div><span class="label">Open to</span><span class="v">2027 summer analyst roles</span></div>
+          </div>
+        </div>
       </div>
-    </div>
-
-    <div class="facts">
-      <div><span class="label">Focus</span><span class="v">Fundamental, long-horizon investing</span></div>
-      <div><span class="label">Building</span><span class="v">Screeners, valuation and trading tools</span></div>
-      <div><span class="label">Open to</span><span class="v">2027 summer analyst roles</span></div>
     </div>
   </section>
 
@@ -508,7 +550,7 @@
       <div>
         <h2 class="section-title">Four pieces of work</h2>
         <p class="section-note">
-          Each of these started as something I was doing by hand. The figure above each one shows
+          Each of these started as something I was doing by hand. The figure beside each one shows
           how it actually works.
         </p>
       </div>
@@ -559,47 +601,50 @@
   <section class="section" id="about">
     <div class="rail">
       <p class="label">§ 03<br>About</p>
-      <div class="about-body reveal">
-        <p>
-          I am a fundamental investor before I am anything else. I hold for years rather than
-          quarters, I want to understand a business well enough to describe it to someone who has
-          never heard of it, and I would rather read the filing than the headline about the filing.
-        </p>
-        <p>
-          The code came second. Every tool here started as something tedious I was doing by hand,
-          and the useful part was never the program, it was learning exactly where my own process
-          was sloppy once I had to write it down as steps.
-        </p>
-        <p>
-          I am working toward a career in wealth management, where the interesting problem is not
-          picking securities in a vacuum but fitting a portfolio to a real person's life, their
-          taxes, their timeline, and what they actually intend to leave behind.
-        </p>
+      <div class="split">
+        <div class="about-body reveal">
+          <p>
+            I am a fundamental investor before I am anything else. I hold for years rather than
+            quarters, I want to understand a business well enough to describe it to someone who has
+            never heard of it, and I would rather read the filing than the headline about the filing.
+          </p>
+          <p>
+            The code came second. Every tool here started as something tedious I was doing by hand,
+            and the useful part was never the program, it was learning exactly where my own process
+            was sloppy once I had to write it down as steps.
+          </p>
+          <p>
+            I am working toward a career in wealth management, where the interesting problem is not
+            picking securities in a vacuum but fitting a portfolio to a real person's life, their
+            taxes, their timeline, and what they actually intend to leave behind.
+          </p>
+        </div>
+        <div class="reveal">
+          <p class="label cv-label">Record</p>
+          <dl class="cv">
+            <dt>University of Wisconsin-Madison</dt>
+            <dd>Personal Finance, Financial Planning concentration</dd>
+            <dt>Involved in</dt>
+            <dd>Business AI Collective, Research Analyst on the faculty AI curriculum team<br>Delta Sigma Pi</dd>
+            <dt>Previously</dt>
+            <dd>UW-La Crosse, Dean's List<br>Financial Planning Association, Chapter Secretary, 2024 to 2026</dd>
+          </dl>
+        </div>
       </div>
-    </div>
-
-    <div class="rail" style="margin-top:var(--s7)">
-      <p class="label">Record</p>
-      <dl class="cv reveal">
-        <dt>University of Wisconsin-Madison</dt>
-        <dd>Personal Finance, Financial Planning concentration</dd>
-        <dt>Involved in</dt>
-        <dd>Business AI Collective, Research Analyst on the faculty AI curriculum team<br>Delta Sigma Pi</dd>
-        <dt>Previously</dt>
-        <dd>UW-La Crosse, Dean's List<br>Financial Planning Association, Chapter Secretary, 2024 to 2026</dd>
-      </dl>
     </div>
   </section>
 
   <section class="section contact" id="contact">
     <div class="rail">
       <p class="label">§ 04<br>Contact</p>
-      <div>
-        <h2>If you are hiring for a 2027 summer analyst seat, I would like to talk.</h2>
-        <p>
-          I am also happy to hear from anyone building in this space, or from students who want to
-          compare notes on the financial planning track.
-        </p>
+      <div class="split is-end">
+        <div>
+          <h2>If you are hiring for a 2027 summer analyst seat, I would like to talk.</h2>
+          <p>
+            I am also happy to hear from anyone building in this space, or from students who want to
+            compare notes on the financial planning track.
+          </p>
+        </div>
         <div class="channels">
           <a href="mailto:ericpeck05@gmail.com">ericpeck05@gmail.com</a>
           <a href="https://www.linkedin.com/in/ericpeck28">LinkedIn</a>
@@ -677,7 +722,7 @@
       '<text x="230" y="10" class="fig-type">SENSITIVITY</text>' +
       cells +
       '<rect x="292" y="84" width="27" height="27" fill="none" stroke="var(--accent)" stroke-width="1.5"/>' +
-      '<text x="230" y="194" class="fig-type">ROWS WACC &#183; COLUMNS TERMINAL GROWTH</text>' +
+      '<text x="230" y="194" class="fig-type">WACC &#215; TERMINAL GROWTH</text>' +
       '</svg>';
   };
 
@@ -880,11 +925,12 @@
     stack.className = "f-stack";
     stack.textContent = p.stack;
 
-    col.appendChild(figure);
-    col.appendChild(h3);
-    col.appendChild(does);
-    col.appendChild(body);
-    col.appendChild(stack);
+    col.className = "f-grid";
+    var text = document.createElement("div");
+    text.appendChild(h3);
+    text.appendChild(does);
+    text.appendChild(body);
+    text.appendChild(stack);
 
     if (p.links.length) {
       var lw = document.createElement("p");
@@ -892,8 +938,11 @@
       p.links.forEach(function (l) {
         var a = document.createElement("a"); a.href = l[1]; a.textContent = l[0]; lw.appendChild(a);
       });
-      col.appendChild(lw);
+      text.appendChild(lw);
     }
+
+    col.appendChild(text);
+    col.appendChild(figure);
 
     sec.appendChild(lab);
     sec.appendChild(col);
