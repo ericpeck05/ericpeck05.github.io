@@ -9,112 +9,80 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet">
 
 <style>
   /* ============================================================
-     TOKENS — warm ground, deep ink, three working hues.
-     Dark is a designed second palette, declared under both the OS
-     media query (guarded) and the data-theme scope, so the toggle
-     wins in both directions.
+     Paper, ink, one accent. Colour appears once, in the data.
      ============================================================ */
 
   :root {
-    --paper:       #F2EFE8;
-    --raised:      #FBFAF6;
-    --sunk:        #E7E2D6;
-    --ink:         #121A21;
-    --ink-soft:    #5A6771;
-    --ink-faint:   #97928A;
-    --rule:        #DCD6C8;
-    --rule-soft:   #EAE5DA;
+    --paper:    #FBFAF7;
+    --paper-2:  #F3F0E9;
+    --ink:      #15171B;
+    --ink-2:    #585D66;
+    --ink-3:    #8E9199;
+    --rule:     #E3DFD7;
+    --rule-2:   #EFECE5;
+    --accent:   #1B4F8F;
 
-    --accent:      #1B4F8F;
-    --accent-soft: #2a78d6;
+    /* the only hues on the page — they encode categories in Fig. 1 */
+    --s-1: #2a78d6;
+    --s-2: #eb6834;
+    --s-3: #1baf7a;
+    --ring: var(--paper);
 
-    --band-bg:     #101C29;
-    --band-ink:    #F2EFE8;
-
-    /* three working hues — validated against the raised surface */
-    --s-1: #2a78d6;   /* investing tools    */
-    --s-2: #eb6834;   /* trading systems    */
-    --s-3: #1baf7a;   /* software & tooling */
-    --s-4: #6F7A3C;   /* business & client  */
-    --ring: var(--raised);
+    /* validated ordinal ink ramp, light end clears 2:1 on paper */
+    --o-1: #ADA9A2; --o-2: #8E8A83; --o-3: #6E6A64; --o-4: #4E4B46; --o-5: #2E2C29;
 
     --serif: "Newsreader", Georgia, "Times New Roman", serif;
-    --sans:  "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
     --mono:  "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
-    --measure: 58ch;
-    --gutter: clamp(1.25rem, 5vw, 5rem);
-    --maxw: 76rem;
-    --ease: cubic-bezier(0.22, 0.68, 0.25, 1);
+    --s1: 0.25rem; --s2: 0.5rem;  --s3: 0.75rem; --s4: 1rem;
+    --s5: 1.5rem; --s6: 2rem;     --s7: 3rem;    --s8: 4.5rem; --s9: 7rem;
 
-    --aura-1: rgba(42, 120, 214, 0.28);
-    --aura-2: rgba(235, 104, 52, 0.24);
-    --aura-3: rgba(27, 175, 122, 0.22);
+    --measure: 62ch;
+    --gutter: clamp(1.5rem, 5vw, 6rem);
+    --maxw: 68rem;
+    --rail: 7.5rem;
+    --ease: cubic-bezier(0.22, 0.68, 0.25, 1);
   }
 
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --paper:       #10131A;
-      --raised:      #171C25;
-      --sunk:        #0B0E14;
-      --ink:         #ECEAE4;
-      --ink-soft:    #9AA3AE;
-      --ink-faint:   #6C7480;
-      --rule:        #272D38;
-      --rule-soft:   #1D222B;
+      --paper:   #0E1013;
+      --paper-2: #15181D;
+      --ink:     #ECEAE5;
+      --ink-2:   #9CA2AB;
+      --ink-3:   #6A7079;
+      --rule:    #262A31;
+      --rule-2:  #1B1E24;
+      --accent:  #7FB0F0;
 
-      --accent:      #6AA5F0;
-      --accent-soft: #3987e5;
+      --s-1: #3987e5; --s-2: #d95926; --s-3: #199e70;
+      --ring: var(--paper);
 
-      --band-bg:     #161B24;
-      --band-ink:    #ECEAE4;
-
-      --s-1: #3987e5;
-      --s-2: #d95926;
-      --s-3: #199e70;
-      --s-4: #A3B061;
-      --ring: var(--raised);
-
-      --aura-1: rgba(57, 135, 229, 0.26);
-      --aura-2: rgba(217, 89, 38, 0.20);
-      --aura-3: rgba(25, 158, 112, 0.20);
+      --o-1: #484D56; --o-2: #636A75; --o-3: #828A95; --o-4: #A5ACB6; --o-5: #CDD3DA;
     }
   }
 
   :root[data-theme="dark"] {
-    --paper:       #10131A;
-    --raised:      #171C25;
-    --sunk:        #0B0E14;
-    --ink:         #ECEAE4;
-    --ink-soft:    #9AA3AE;
-    --ink-faint:   #6C7480;
-    --rule:        #272D38;
-    --rule-soft:   #1D222B;
+    --paper:   #0E1013;
+    --paper-2: #15181D;
+    --ink:     #ECEAE5;
+    --ink-2:   #9CA2AB;
+    --ink-3:   #6A7079;
+    --rule:    #262A31;
+    --rule-2:  #1B1E24;
+    --accent:  #7FB0F0;
 
-    --accent:      #6AA5F0;
-    --accent-soft: #3987e5;
+    --s-1: #3987e5; --s-2: #d95926; --s-3: #199e70;
+    --ring: var(--paper);
 
-    --band-bg:     #161B24;
-    --band-ink:    #ECEAE4;
-
-    --s-1: #3987e5;
-    --s-2: #d95926;
-    --s-3: #199e70;
-    --s-4: #A3B061;
-    --ring: var(--raised);
-
-    --aura-1: rgba(57, 135, 229, 0.26);
-    --aura-2: rgba(217, 89, 38, 0.20);
-    --aura-3: rgba(25, 158, 112, 0.20);
+    --o-1: #484D56; --o-2: #636A75; --o-3: #828A95; --o-4: #A5ACB6; --o-5: #CDD3DA;
   }
 
-  /* ============================================================
-     BASE
-     ============================================================ */
+  /* ---------- base ---------- */
 
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
@@ -125,10 +93,12 @@
     background: var(--paper);
     color: var(--ink);
     font-family: var(--serif);
-    font-size: clamp(1.0625rem, 0.3vw + 1rem, 1.1875rem);
-    line-height: 1.62;
+    font-size: clamp(1.0625rem, 0.25vw + 1rem, 1.175rem);
+    line-height: 1.66;
+    font-weight: 400;
     -webkit-font-smoothing: antialiased;
-    transition: background-color 420ms var(--ease), color 420ms var(--ease);
+    text-rendering: optimizeLegibility;
+    transition: background-color 500ms var(--ease), color 500ms var(--ease);
   }
 
   img { max-width: 100%; }
@@ -136,509 +106,372 @@
   a { color: inherit; }
 
   a:focus-visible, button:focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 1.5px solid var(--accent);
     outline-offset: 3px;
-    border-radius: 2px;
   }
 
   .wrap { max-width: var(--maxw); margin: 0 auto; padding-inline: var(--gutter); }
 
-  .mono {
+  .label {
     font-family: var(--mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.1em;
+    line-height: 1.7;
+    font-size: 0.6875rem;
+    font-weight: 400;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--ink-faint);
+    color: var(--ink-3);
+    margin: 0;
   }
 
-  /* ============================================================
-     PROGRESS + MASTHEAD
-     ============================================================ */
-
-  .progress {
-    position: fixed; top: 0; left: 0; height: 2px; width: 0%;
-    background: linear-gradient(90deg, var(--s-1), var(--s-3), var(--s-2));
-    z-index: 60;
-    transition: width 90ms linear;
-  }
+  /* ---------- masthead ---------- */
 
   .masthead {
-    position: sticky; top: 0; z-index: 50;
-    background: color-mix(in srgb, var(--paper) 85%, transparent);
-    backdrop-filter: saturate(1.5) blur(12px);
+    position: sticky; top: 0; z-index: 40;
+    background: color-mix(in srgb, var(--paper) 92%, transparent);
+    backdrop-filter: blur(8px);
     border-bottom: 1px solid transparent;
-    transition: border-color 300ms var(--ease), background-color 420ms var(--ease);
+    transition: border-color 400ms var(--ease), background-color 500ms var(--ease);
     padding-top: env(safe-area-inset-top, 0px);
   }
-
   .masthead.is-stuck { border-bottom-color: var(--rule); }
 
   .masthead-inner {
     max-width: var(--maxw); margin: 0 auto;
-    padding: 0.85rem var(--gutter);
-    display: flex; align-items: center; gap: 1.5rem;
+    padding: var(--s3) var(--gutter);
+    display: flex; align-items: baseline; gap: var(--s5);
   }
 
   .nameplate {
-    font-family: var(--serif); font-size: 1.0625rem; letter-spacing: 0.02em;
-    text-decoration: none; margin-right: auto; white-space: nowrap;
+    font-family: var(--serif); font-size: 1.0625rem;
+    letter-spacing: 0.005em; text-decoration: none; margin-right: auto;
   }
 
-  .nameplate::after {
-    content: ""; display: block; height: 1px; width: 0;
-    background: var(--accent); transition: width 320ms var(--ease);
-  }
-  .nameplate:hover::after { width: 100%; }
-
-  .nav { display: flex; gap: 1.5rem; font-family: var(--sans); font-size: 0.85rem; }
-
+  .nav { display: flex; gap: var(--s5); }
   .nav a {
-    text-decoration: none; color: var(--ink-soft); padding-bottom: 2px;
-    border-bottom: 1px solid transparent;
-    transition: color 200ms var(--ease), border-color 200ms var(--ease);
+    font-family: var(--mono); font-size: 0.6875rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink-3); text-decoration: none;
+    transition: color 250ms var(--ease);
   }
-  .nav a:hover, .nav a.is-current { color: var(--ink); border-bottom-color: var(--accent); }
+  .nav a:hover, .nav a.is-current { color: var(--ink); }
   @media (max-width: 680px) { .nav { display: none; } }
 
   .theme-toggle {
-    font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.1em;
-    text-transform: uppercase; color: var(--ink-soft);
-    background: transparent; border: 1px solid var(--rule); border-radius: 999px;
-    padding: 0.35rem 0.75rem; cursor: pointer;
-    display: inline-flex; align-items: center; gap: 0.45rem;
-    transition: border-color 200ms var(--ease), color 200ms var(--ease);
+    font-family: var(--mono); font-size: 0.6875rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink-3); background: none; border: 0; padding: 0;
+    cursor: pointer; transition: color 250ms var(--ease);
   }
-  .theme-toggle:hover { border-color: var(--accent); color: var(--ink); }
-  .theme-toggle .tdot {
-    width: 7px; height: 7px; border-radius: 50%;
-    background: var(--accent); flex: none;
-    transition: background-color 300ms var(--ease);
+  .theme-toggle:hover { color: var(--ink); }
+
+  /* ---------- rail grid ---------- */
+
+  .rail {
+    display: grid;
+    grid-template-columns: var(--rail) minmax(0, 1fr);
+    gap: var(--s5) var(--s6);
+    align-items: start;
   }
-
-  /* ============================================================
-     HERO
-     ============================================================ */
-
-  .hero { position: relative; overflow: hidden; padding-block: clamp(3.5rem, 10vw, 7.5rem) clamp(2.5rem, 6vw, 4.5rem); }
-
-  .hero-aura {
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    filter: blur(28px);
-    -webkit-mask-image: radial-gradient(105% 92% at 50% 46%, #000 26%, transparent 84%);
-    mask-image: radial-gradient(105% 92% at 50% 46%, #000 26%, transparent 84%);
-    opacity: 0;
-    transition: opacity 1200ms var(--ease);
-  }
-  .hero-aura.is-on { opacity: 1; }
-
-  .hero-aura span {
-    position: absolute;
-    border-radius: 50%;
-    display: block;
-    will-change: transform;
-  }
-  .hero-aura .a1 { width: 46vw; height: 46vw; left: -6%; top: -12%;  background: radial-gradient(circle at 50% 50%, var(--aura-1), transparent 68%); }
-  .hero-aura .a2 { width: 42vw; height: 42vw; left: 48%; top: -18%;  background: radial-gradient(circle at 50% 50%, var(--aura-2), transparent 68%); }
-  .hero-aura .a3 { width: 44vw; height: 44vw; left: 22%; top: 34%; background: radial-gradient(circle at 50% 50%, var(--aura-3), transparent 68%); }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .hero-aura .a1 { animation: drift1 26s var(--ease) infinite alternate; }
-    .hero-aura .a2 { animation: drift2 31s var(--ease) infinite alternate; }
-    .hero-aura .a3 { animation: drift3 37s var(--ease) infinite alternate; }
+  @media (max-width: 820px) {
+    .rail { grid-template-columns: 1fr; gap: var(--s3); }
   }
 
-  @keyframes drift1 { from { transform: translate3d(0,0,0) scale(1); } to { transform: translate3d(7%, 5%, 0) scale(1.16); } }
-  @keyframes drift2 { from { transform: translate3d(0,0,0) scale(1.1); } to { transform: translate3d(-9%, 7%, 0) scale(0.94); } }
-  @keyframes drift3 { from { transform: translate3d(0,0,0) scale(0.95); } to { transform: translate3d(6%, -8%, 0) scale(1.14); } }
+  /* ---------- hero ---------- */
 
-  .hero .kicker { margin: 0 0 1.75rem; }
+  .hero { padding-block: clamp(4rem, 11vw, 9rem) clamp(3rem, 7vw, 6rem); }
 
   .statement {
     font-family: var(--serif); font-weight: 300;
-    font-size: clamp(2.15rem, 6.4vw, 5rem);
-    line-height: 1.03; letter-spacing: -0.03em;
-    margin: 0 0 1.9rem; max-width: 21ch; text-wrap: balance;
+    font-size: clamp(2.3rem, 6.1vw, 4.6rem);
+    line-height: 1.045; letter-spacing: -0.028em;
+    margin: 0 0 var(--s6); max-width: 19ch;
+    text-wrap: balance;
   }
+  .statement em { font-style: italic; }
 
-  .statement em {
-    font-style: italic;
-    background: linear-gradient(100deg, var(--s-1), var(--s-3) 55%, var(--s-2));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+  .lede {
+    font-size: clamp(1.0625rem, 0.45vw + 1rem, 1.25rem);
+    line-height: 1.6; color: var(--ink-2);
+    max-width: 44ch; margin: 0;
   }
+  .lede strong { color: var(--ink); font-weight: 400; }
 
-  .standfirst {
-    font-size: clamp(1.0625rem, 0.5vw + 1rem, 1.3rem);
-    line-height: 1.55; color: var(--ink-soft);
-    max-width: 46ch; margin: 0 0 2.75rem;
+  .facts {
+    margin-top: clamp(2.5rem, 6vw, 4.5rem);
+    border-top: 1px solid var(--rule);
+    padding-top: var(--s5);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    gap: var(--s5) var(--s6);
   }
-  .standfirst strong { color: var(--ink); font-weight: 400; }
-
-  .hero-meta {
-    display: flex; flex-wrap: wrap; gap: 0.6rem 2.5rem;
-    padding-top: 1.5rem; border-top: 1px solid var(--rule);
-  }
-  .hero-meta div { display: flex; flex-direction: column; gap: 0.3rem; }
-  .hero-meta .v { font-family: var(--sans); font-size: 0.92rem; color: var(--ink); }
+  .facts div { display: flex; flex-direction: column; gap: var(--s2); }
+  .facts .v { font-size: 1rem; line-height: 1.4; }
 
   .line { display: block; overflow: hidden; }
   .line > span { display: block; }
-
   @media (prefers-reduced-motion: no-preference) {
-    .line > span { transform: translateY(105%); animation: riseIn 950ms var(--ease) forwards; }
-    .line:nth-child(1) > span { animation-delay: 60ms; }
-    .line:nth-child(2) > span { animation-delay: 150ms; }
-    .line:nth-child(3) > span { animation-delay: 240ms; }
+    .line > span { transform: translateY(104%); animation: rise 1000ms var(--ease) forwards; }
+    .line:nth-child(2) > span { animation-delay: 70ms; }
+    .line:nth-child(3) > span { animation-delay: 140ms; }
   }
-  @keyframes riseIn { to { transform: translateY(0); } }
+  @keyframes rise { to { transform: translateY(0); } }
 
-  /* ============================================================
-     SECTIONS
-     ============================================================ */
+  /* ---------- sections ---------- */
 
-  .section { padding-block: clamp(3rem, 7vw, 5.5rem); }
+  .section { padding-block: clamp(3rem, 7vw, 5.5rem); border-top: 1px solid var(--rule); }
 
-  .section-head {
-    display: flex; align-items: baseline; justify-content: space-between;
-    gap: 1rem; padding-bottom: 0.9rem; margin: 0 0 2.25rem;
-    border-bottom: 1px solid var(--ink);
-  }
-  .section-head h2 {
+  .section-title {
     font-family: var(--serif); font-weight: 400;
-    font-size: clamp(1.4rem, 2vw, 1.75rem); letter-spacing: -0.01em; margin: 0;
+    font-size: clamp(1.5rem, 2.2vw, 1.9rem);
+    letter-spacing: -0.012em; margin: 0 0 var(--s4);
+  }
+  .section-note { color: var(--ink-2); max-width: 46ch; margin: 0; font-size: 1rem; }
+
+  /* ---------- featured work ---------- */
+
+  .featured { margin-top: var(--s8); }
+  .featured + .featured { margin-top: clamp(3.5rem, 8vw, 6rem); }
+
+  .fig { background: none; border: 0; margin: 0 0 var(--s6); max-width: 34rem; }
+  .fig svg { display: block; width: 100%; height: auto; }
+
+  .f-title {
+    font-family: var(--serif); font-weight: 400;
+    font-size: clamp(1.5rem, 2.4vw, 2rem);
+    line-height: 1.12; letter-spacing: -0.016em;
+    margin: var(--s2) 0 var(--s4);
   }
 
-  /* ============================================================
-     FILTERS
-     ============================================================ */
-
-  .filters { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem; }
-
-  .chip {
-    font-family: var(--sans); font-size: 0.82rem; color: var(--ink-soft);
-    background: transparent; border: 1px solid var(--rule); border-radius: 999px;
-    padding: 0.42rem 0.95rem; cursor: pointer;
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    transition: border-color 200ms var(--ease), color 200ms var(--ease),
-                background-color 200ms var(--ease), transform 200ms var(--ease);
-  }
-  .chip:hover { border-color: var(--ink-soft); color: var(--ink); transform: translateY(-1px); }
-  .chip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
-  .chip .swatch { width: 8px; height: 8px; border-radius: 50%; flex: none; }
-
-  /* ============================================================
-     TIMELINE CHART
-     ============================================================ */
-
-  .chart-card {
-    background: var(--raised); border: 1px solid var(--rule-soft);
-    border-radius: 6px; padding: clamp(1.1rem, 2.5vw, 1.9rem);
-    margin-bottom: 3.25rem;
+  .f-does {
+    font-size: 1.0625rem; line-height: 1.55;
+    margin: 0 0 var(--s4); max-width: 54ch; color: var(--ink);
   }
 
-  .chart-top {
+  .f-body { margin: 0; max-width: var(--measure); color: var(--ink-2); }
+
+  .f-stack {
+    font-family: var(--mono); font-size: 0.6875rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-3); margin: var(--s4) 0 0;
+  }
+
+  .links { margin: var(--s5) 0 0; display: flex; gap: var(--s5); flex-wrap: wrap; }
+  .links a {
+    font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.06em;
+    color: var(--accent); text-decoration: none;
+    border-bottom: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+    padding-bottom: 2px;
+    transition: border-color 250ms var(--ease);
+  }
+  .links a:hover { border-bottom-color: var(--accent); }
+
+  /* ---------- the index of everything else ---------- */
+
+  .index-list { margin-top: var(--s6); }
+
+  .entry {
+    display: grid;
+    grid-template-columns: 4rem minmax(0, 1fr) auto;
+    gap: var(--s4) var(--s5);
+    align-items: center;
+    padding-block: var(--s5);
+    border-top: 1px solid var(--rule-2);
+  }
+  .entry:last-child { border-bottom: 1px solid var(--rule-2); }
+
+  .entry .glyph { width: 56px; height: 42px; }
+  .entry .glyph svg { display: block; width: 100%; height: 100%; }
+
+  .entry h3 {
+    font-family: var(--serif); font-weight: 400; font-size: 1.22rem;
+    line-height: 1.2; margin: 0 0 var(--s2); letter-spacing: -0.01em;
+  }
+  .entry p { margin: 0; font-size: 0.98rem; line-height: 1.5; color: var(--ink-2); max-width: 56ch; }
+  .entry .stack {
+    font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink-3); margin-top: var(--s3);
+  }
+  .entry .go {
+    font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.06em;
+    color: var(--accent); text-decoration: none; white-space: nowrap;
+    border-bottom: 1px solid transparent; padding-bottom: 2px;
+    transition: border-color 250ms var(--ease);
+  }
+  .entry .go:hover { border-bottom-color: var(--accent); }
+  .go-stack { display: flex; flex-direction: column; align-items: flex-end; gap: var(--s2); }
+
+  @media (max-width: 680px) {
+    .entry { grid-template-columns: 56px minmax(0, 1fr); }
+    .entry .go, .entry .stack-right, .entry .go-stack { grid-column: 2; justify-self: start; }
+    .go-stack { flex-direction: row; gap: var(--s5); }
+  }
+
+  /* ---------- figure 1 ---------- */
+
+  .figure-block { margin-top: clamp(3.5rem, 8vw, 6rem); }
+
+  .fig-head {
     display: flex; align-items: baseline; justify-content: space-between;
-    gap: 1rem; flex-wrap: wrap; margin-bottom: 1.6rem;
+    gap: var(--s4); flex-wrap: wrap; margin-bottom: var(--s5);
   }
-  .chart-title { font-family: var(--sans); font-size: 0.95rem; font-weight: 500; margin: 0; }
-  .chart-sub { font-family: var(--sans); font-size: 0.8rem; color: var(--ink-soft); margin: 0.3rem 0 0; max-width: 60ch; }
+  .fig-cap { font-size: 0.98rem; color: var(--ink-2); max-width: 56ch; margin: var(--s2) 0 0; }
 
   .view-toggle {
-    font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.08em;
-    text-transform: uppercase; color: var(--ink-soft);
-    background: transparent; border: 1px solid var(--rule); border-radius: 3px;
-    padding: 0.32rem 0.6rem; cursor: pointer;
+    font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--ink-3);
+    background: none; border: 0; padding: 0; cursor: pointer;
+    transition: color 250ms var(--ease);
   }
-  .view-toggle:hover { border-color: var(--accent); color: var(--ink); }
+  .view-toggle:hover { color: var(--ink); }
 
-  .plot { position: relative; --labelw: 11.5rem; padding-left: var(--labelw); }
-
+  .plot { position: relative; --labelw: 12.5rem; padding-left: var(--labelw); }
   .grid-layer { position: absolute; left: var(--labelw); right: 0; top: 0; bottom: 0; pointer-events: none; }
 
-  .lane { position: relative; height: 56px; border-top: 1px solid var(--rule-soft); }
-  .lane:last-of-type { border-bottom: 1px solid var(--rule-soft); }
+  .lane { position: relative; height: 54px; border-top: 1px solid var(--rule-2); }
+  .lane:last-of-type { border-bottom: 1px solid var(--rule-2); }
 
   .lane-label {
-    position: absolute; right: calc(100% + 1.25rem); top: 50%;
-    transform: translateY(-50%); width: calc(var(--labelw) - 1.25rem);
-    font-family: var(--sans); font-size: 0.78rem; color: var(--ink-soft);
-    display: flex; align-items: center; gap: 0.45rem;
-    pointer-events: none; z-index: 2;
+    position: absolute; right: calc(100% + var(--s4)); top: 50%;
+    transform: translateY(-50%); width: calc(var(--labelw) - var(--s4));
+    font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.06em;
+    color: var(--ink-2); display: flex; align-items: center; gap: var(--s2);
+    pointer-events: none;
   }
-  .lane-label .swatch { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+  .lane-label .swatch { width: 7px; height: 7px; border-radius: 50%; flex: none; }
 
   .lane-track { position: absolute; inset: 0; }
 
   .dot {
-    position: absolute; top: 50%;
-    width: 26px; height: 26px; margin: -13px 0 0 -13px;
-    padding: 0; border: 0; background: transparent; cursor: pointer; z-index: 3;
-    transition: opacity 260ms var(--ease);
+    position: absolute; top: 50%; width: 26px; height: 26px;
+    margin: -13px 0 0 -13px; padding: 0; border: 0;
+    background: none; cursor: pointer; z-index: 3;
   }
   .dot::after {
-    content: ""; position: absolute; inset: 8px; border-radius: 50%;
+    content: ""; position: absolute; inset: 9px; border-radius: 50%;
     background: var(--c); box-shadow: 0 0 0 2px var(--ring);
-    transition: inset 180ms var(--ease);
+    transition: inset 200ms var(--ease);
   }
-  .dot:hover::after, .dot:focus-visible::after, .dot.is-active::after { inset: 4px; }
-  .dot.is-dimmed { opacity: 0.16; }
+  .dot:hover::after, .dot:focus-visible::after, .dot.is-active::after { inset: 6px; }
 
-  .axis { --labelw: 11.5rem; padding-left: var(--labelw); margin-top: 4px; }
-  .axis-inner { position: relative; height: 22px; }
-
+  .axis { --labelw: 12.5rem; padding-left: var(--labelw); margin-top: var(--s2); }
+  .axis-inner { position: relative; height: 20px; }
   .tick {
     position: absolute; top: 0; transform: translateX(-50%);
-    font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.06em;
-    color: var(--ink-faint); white-space: nowrap;
+    font-family: var(--mono); font-size: 0.625rem; letter-spacing: 0.08em;
+    color: var(--ink-3); white-space: nowrap;
   }
   .tick.is-first { transform: none; }
-
-  .gridline { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--rule-soft); }
+  .gridline { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--rule-2); }
 
   .tip {
-    position: absolute; z-index: 10; min-width: 11rem; max-width: 17rem;
-    background: var(--ink); color: var(--paper); border-radius: 4px;
-    padding: 0.6rem 0.75rem; font-family: var(--sans); font-size: 0.78rem; line-height: 1.45;
-    pointer-events: none; opacity: 0; transform: translate(-50%, -8px);
-    transition: opacity 140ms var(--ease);
+    position: absolute; z-index: 10; min-width: 10rem; max-width: 17rem;
+    background: var(--ink); color: var(--paper);
+    padding: var(--s3); font-family: var(--mono); font-size: 0.7rem; line-height: 1.5;
+    pointer-events: none; opacity: 0; transition: opacity 160ms var(--ease);
   }
   .tip.is-on { opacity: 1; }
-  .tip .t-name { font-weight: 600; display: block; }
-  .tip .t-meta { color: color-mix(in srgb, var(--paper) 65%, transparent); display: block; margin-top: 0.15rem; }
+  .tip .t-name { display: block; letter-spacing: 0.02em; }
+  .tip .t-meta { display: block; margin-top: var(--s1); color: color-mix(in srgb, var(--paper) 60%, transparent); }
 
-  .chart-note { font-family: var(--sans); font-size: 0.76rem; color: var(--ink-faint); margin: 1.1rem 0 0; }
-  .empty-note { font-family: var(--sans); font-size: 0.82rem; color: var(--ink-soft); padding: 1.5rem 0; margin: 0; }
+  .fig-note { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.06em; color: var(--ink-3); margin: var(--s5) 0 0; line-height: 1.7; }
 
-  .data-table { width: 100%; border-collapse: collapse; font-family: var(--sans); font-size: 0.83rem; }
-  .data-table caption { text-align: left; color: var(--ink-soft); font-size: 0.78rem; padding-bottom: 0.7rem; }
-  .data-table th, .data-table td { text-align: left; padding: 0.5rem 0.75rem 0.5rem 0; border-bottom: 1px solid var(--rule-soft); }
-  .data-table thead th { font-weight: 500; color: var(--ink-soft); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; }
-  .data-table tbody th { font-weight: 400; color: var(--ink); font-size: 0.83rem; }
-  .data-table td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .data-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+  .data-table th, .data-table td { text-align: left; padding: var(--s3) var(--s4) var(--s3) 0; border-bottom: 1px solid var(--rule-2); }
+  .data-table thead th {
+    font-family: var(--mono); font-weight: 400; font-size: 0.65rem;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3);
+  }
+  .data-table tbody th { font-weight: 400; color: var(--ink); }
+  .data-table td.num { font-family: var(--mono); font-size: 0.8rem; color: var(--ink-2); white-space: nowrap; }
   .table-scroll { overflow-x: auto; }
 
-  /* ============================================================
-     PROJECTS
-     ============================================================ */
+  /* ---------- about ---------- */
 
-  .project {
-    display: grid;
-    grid-template-columns: 19rem 1fr;
-    gap: 1.5rem 3rem;
-    padding-block: 2.4rem;
-    border-bottom: 1px solid var(--rule);
-    position: relative;
-  }
-  .project::before {
-    content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px;
-    background: var(--c);
-    transform: scaleX(0); transform-origin: left;
-    transition: transform 460ms var(--ease);
-  }
-  .project:hover::before { transform: scaleX(1); }
-  .project:last-of-type { border-bottom: 0; }
-  .project.is-hidden { display: none; }
-  .project.is-flash { background: color-mix(in srgb, var(--c) 8%, transparent); }
-
-  .thumb {
-    position: relative;
-    aspect-ratio: 4 / 3;
-    background: var(--raised);
-    border: 1px solid var(--rule-soft);
-    border-radius: 5px;
-    overflow: hidden;
-    transition: border-color 300ms var(--ease), transform 420ms var(--ease);
-  }
-  .project:hover .thumb { border-color: color-mix(in srgb, var(--c) 45%, var(--rule)); transform: translateY(-2px); }
-  .thumb svg { display: block; width: 100%; height: 100%; }
-
-  .p-head { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.6rem; }
-  .p-index { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; color: var(--ink-faint); }
-  .p-cat {
-    font-family: var(--sans); font-size: 0.72rem; color: var(--ink-soft);
-    display: inline-flex; align-items: center; gap: 0.4rem;
-  }
-  .p-cat .swatch { width: 7px; height: 7px; border-radius: 50%; background: var(--c); flex: none; }
-
-  .project h3 {
-    font-family: var(--serif); font-size: clamp(1.35rem, 1.7vw, 1.6rem);
-    font-weight: 400; line-height: 1.14; margin: 0; letter-spacing: -0.014em;
-  }
-
-  .p-does {
-    font-family: var(--sans); font-size: 0.92rem; line-height: 1.5;
-    color: var(--ink); margin: 0.75rem 0 0; max-width: 54ch;
-  }
-
-  .meta { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em; color: var(--ink-faint); margin: 0.65rem 0 0; }
-
-  .project p.body { margin: 1rem 0 0; max-width: var(--measure); color: var(--ink-soft); }
-
-  .project-links {
-    font-family: var(--sans); font-size: 0.85rem; margin: 1.1rem 0 0;
-    display: flex; gap: 1.5rem; flex-wrap: wrap;
-  }
-  .project-links a {
-    color: var(--accent); text-decoration: none;
-    border-bottom: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
-    padding-bottom: 1px; transition: border-color 200ms var(--ease);
-  }
-  .project-links a:hover { border-bottom-color: var(--accent); }
-
-  /* ============================================================
-     PROJECT ARTWORK — shared primitives
-     ============================================================ */
-
-  .art-bg { fill: none; }
-  .art-line { stroke: var(--ink-faint); stroke-width: 1; fill: none; opacity: 0.45; }
-  .art-mute { fill: var(--rule); }
-  .art-ink  { fill: var(--ink-faint); opacity: 0.55; }
-  .art-c    { fill: var(--c); }
-  .art-cs   { stroke: var(--c); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .anim-fade   { animation: aFade 3.6s ease-in-out infinite; }
-    .anim-soft   { animation: aSoft 4.2s ease-in-out infinite; }
-    .anim-pulse  { animation: aPulse 2.8s ease-in-out infinite; }
-    .anim-ring   { animation: aRing 3.4s ease-out infinite; }
-    .anim-sway   { animation: aSway 5s ease-in-out infinite alternate; transform-origin: 50% 100%; }
-    .anim-blink  { animation: aBlink 1.15s step-end infinite; }
-    .anim-slide  { animation: aSlide 11s linear infinite; }
-    .anim-draw   { stroke-dasharray: 220; stroke-dashoffset: 220; animation: aDraw 3.4s var(--ease) infinite; }
-    .anim-rise   { animation: aRise 3.2s ease-in-out infinite; }
-    .anim-drift  { animation: aDrift 9s ease-in-out infinite alternate; }
-    .anim-fall   { animation: aFall 4.2s ease-in-out infinite; }
-  }
-
-  @keyframes aFade  { 0%,100% { opacity: 0.45; } 50% { opacity: 1; } }
-  @keyframes aSoft  { 0%,100% { opacity: 0.72; } 50% { opacity: 1; } }
-  @keyframes aPulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.35); } }
-  @keyframes aRing  { 0% { r: 6; opacity: 0.65; } 100% { r: 46; opacity: 0; } }
-  @keyframes aSway  { from { transform: rotate(-3.5deg); } to { transform: rotate(3.5deg); } }
-  @keyframes aBlink { 0%,50% { opacity: 1; } 51%,100% { opacity: 0; } }
-  @keyframes aSlide { from { transform: translateX(0); } to { transform: translateX(-160px); } }
-  @keyframes aDraw  { 0% { stroke-dashoffset: 220; } 45%,100% { stroke-dashoffset: 0; } }
-  @keyframes aRise  { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
-  @keyframes aDrift { from { transform: translate(0,0); } to { transform: translate(5px,-4px); } }
-  @keyframes aFall  { 0% { transform: translateY(-6px); opacity: 0; } 20%,80% { opacity: 1; } 100% { transform: translateY(10px); opacity: 0; } }
-
-  /* hover intensifies the artwork */
-  .project:hover .art-c { filter: saturate(1.15); }
-
-  /* ============================================================
-     ABOUT
-     ============================================================ */
-
-  .about-grid { display: grid; grid-template-columns: 17rem 1fr; gap: 1.5rem 3rem; }
-  .aside { font-family: var(--sans); font-size: 0.86rem; line-height: 1.6; margin: 0; }
-  .aside dt {
-    font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.1em;
-    text-transform: uppercase; color: var(--ink-faint); margin-top: 1.35rem;
-  }
-  .aside dt:first-child { margin-top: 0; }
-  .aside dd { margin: 0.3rem 0 0; color: var(--ink); }
-
-  .about-body p { max-width: var(--measure); margin: 0 0 1.5rem; }
+  .about-body p { max-width: var(--measure); margin: 0 0 var(--s5); }
   .about-body p:last-child { margin-bottom: 0; }
-  .about-body p:first-child {
-    font-size: clamp(1.15rem, 0.6vw + 1rem, 1.45rem); line-height: 1.45; color: var(--ink);
-  }
+  .about-body p:first-child { font-size: clamp(1.15rem, 0.5vw + 1rem, 1.4rem); line-height: 1.5; }
 
-  /* ============================================================
-     CONTACT + FOOTER
-     ============================================================ */
+  .cv { margin: 0; }
+  .cv dt { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); margin-top: var(--s5); }
+  .cv dt:first-child { margin-top: 0; }
+  .cv dd { margin: var(--s2) 0 0; font-size: 0.95rem; line-height: 1.5; }
 
-  .contact {
-    background: var(--band-bg); color: var(--band-ink);
-    border-top: 2px solid var(--accent);
-    padding-block: clamp(3rem, 7vw, 5.5rem);
-    transition: background-color 420ms var(--ease), color 420ms var(--ease);
-  }
+  /* ---------- contact ---------- */
+
   .contact h2 {
     font-family: var(--serif); font-weight: 300;
-    font-size: clamp(1.65rem, 3.6vw, 2.8rem); line-height: 1.14;
-    letter-spacing: -0.022em; margin: 0 0 1.1rem; max-width: 24ch; text-wrap: balance;
+    font-size: clamp(1.6rem, 3.4vw, 2.6rem); line-height: 1.16;
+    letter-spacing: -0.022em; margin: 0 0 var(--s4); max-width: 22ch; text-wrap: balance;
   }
-  .contact p { max-width: 46ch; margin: 0 0 2.25rem; color: color-mix(in srgb, var(--band-ink) 76%, transparent); }
+  .contact p { max-width: 44ch; margin: 0 0 var(--s6); color: var(--ink-2); }
 
-  .channels { display: flex; flex-wrap: wrap; gap: 0.75rem; font-family: var(--sans); font-size: 0.9rem; }
+  .channels { display: flex; flex-wrap: wrap; gap: var(--s5); }
   .channels a {
-    text-decoration: none;
-    border: 1px solid color-mix(in srgb, var(--band-ink) 32%, transparent);
-    padding: 0.62rem 1.15rem; border-radius: 3px;
-    transition: background-color 220ms var(--ease), border-color 220ms var(--ease), transform 220ms var(--ease);
+    font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.04em;
+    text-decoration: none; color: var(--ink);
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 3px;
+    transition: border-color 250ms var(--ease);
   }
-  .channels a:hover {
-    background: color-mix(in srgb, var(--band-ink) 12%, transparent);
-    border-color: var(--band-ink);
-    transform: translateY(-2px);
-  }
+  .channels a:hover { border-bottom-color: var(--accent); }
 
   footer {
-    font-family: var(--sans); font-size: 0.8rem; color: var(--ink-soft);
-    padding-block: 2rem; padding-bottom: calc(2rem + env(safe-area-inset-bottom, 0px));
-    display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+    border-top: 1px solid var(--rule);
+    padding-block: var(--s6);
+    padding-bottom: calc(var(--s6) + env(safe-area-inset-bottom, 0px));
   }
-  footer a { color: var(--ink-soft); }
+  .colophon {
+    font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.06em;
+    color: var(--ink-3); line-height: 1.9; margin: 0;
+  }
+  .colophon a { color: var(--ink-3); }
 
-  /* ============================================================
-     REVEAL
-     ============================================================ */
+  /* ---------- figures: ink only, one accent mark each ---------- */
+
+  .ink-hair   { fill: none; stroke: var(--ink-3); stroke-width: 1; }
+  .ink-fill   { fill: var(--ink-3); }
+  .ink-faint  { fill: var(--o-1); }
+  .ink-rule   { stroke: var(--rule); stroke-width: 1; fill: none; }
+  .g-line     { stroke: var(--o-1); stroke-width: 1; fill: none; }
+  .mark       { fill: var(--accent); }
+  .mark-s     { stroke: var(--accent); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .fig-type   { font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em; fill: var(--ink-3); }
 
   @media (prefers-reduced-motion: no-preference) {
-    .js .reveal { opacity: 0; transform: translateY(16px); }
+    .pop { opacity: 0; }
+    .is-in .pop { animation: pop 520ms var(--ease) forwards; }
+  }
+  @keyframes pop { to { opacity: 1; } }
+
+  /* ---------- reveal ---------- */
+
+  @media (prefers-reduced-motion: no-preference) {
+    .js .reveal { opacity: 0; transform: translateY(8px); }
     .js .reveal.is-in {
       opacity: 1; transform: none;
-      transition: opacity 660ms var(--ease), transform 660ms var(--ease);
+      transition: opacity 700ms var(--ease), transform 700ms var(--ease);
     }
   }
 
-  /* ============================================================
-     RESPONSIVE
-     ============================================================ */
-
-  @media (max-width: 900px) {
-    .project { grid-template-columns: 14rem 1fr; gap: 1.25rem 2rem; }
-    .about-grid { grid-template-columns: 1fr; gap: 1rem; }
-  }
-
   @media (max-width: 700px) {
-    .project { grid-template-columns: 1fr; gap: 1.1rem; padding-block: 2rem; }
-    .thumb { max-width: 22rem; }
-    .plot { padding-left: 0; --labelw: 0rem; }
-    .axis { padding-left: 0; --labelw: 0rem; }
-    .lane-label { position: static; transform: none; width: auto; padding: 0.4rem 0 0; }
-    .lane { height: auto; min-height: 78px; }
+    .plot, .axis { padding-left: 0; --labelw: 0rem; }
+    .lane-label { position: static; transform: none; width: auto; padding: var(--s2) 0 0; }
+    .lane { height: auto; min-height: 76px; }
     .lane-track { top: 1.7rem; }
   }
-
-  @media (max-width: 560px) {
-    .tick:nth-child(even) { display: none; }
-  }
-
-  @media (max-width: 480px) {
-    .hero-meta { gap: 0.9rem 1.5rem; }
-  }
+  @media (max-width: 560px) { .tick:nth-child(even) { display: none; } }
 </style>
 </head>
 <body data-palette="#2a78d6,#eb6834,#1baf7a" data-mode="light">
-
-<div class="progress" id="progress" aria-hidden="true"></div>
 
 <header class="masthead" id="masthead">
   <div class="masthead-inner">
     <a class="nameplate" href="#top">Eric Peck</a>
     <nav class="nav" aria-label="Sections">
-      <a href="#work">Work</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
+      <a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a>
     </nav>
-    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch colour theme">
-      <span class="tdot" aria-hidden="true"></span><span id="theme-label">Light</span>
+    <button class="theme-toggle" id="theme-toggle" type="button">
+      <span id="theme-label">Light</span>
     </button>
   </div>
 </header>
@@ -646,76 +479,86 @@
 <main class="wrap" id="top">
 
   <section class="hero">
-    <div class="hero-aura" id="aura" aria-hidden="true">
-      <span class="a1"></span><span class="a2"></span><span class="a3"></span>
+    <div class="rail">
+      <p class="label">Finance<br>UW&#8209;Madison</p>
+      <div>
+        <h1 class="statement">
+          <span class="line"><span>I read annual reports</span></span>
+          <span class="line"><span>for fun, then write code</span></span>
+          <span class="line"><span>to make the reading <em>faster</em>.</span></span>
+        </h1>
+        <p class="lede">
+          Finance student at <strong>UW-Madison</strong>, concentrating in financial planning.
+          Last summer I built client analysis tools at a wealth management firm in Chicago.
+          I am looking for a 2027 summer analyst seat.
+        </p>
+      </div>
     </div>
-    <p class="mono kicker">Finance · UW-Madison · Financial planning</p>
-    <h1 class="statement">
-      <span class="line"><span>I read annual reports</span></span>
-      <span class="line"><span>for fun, then write code</span></span>
-      <span class="line"><span>to make the reading <em>faster</em>.</span></span>
-    </h1>
-    <p class="standfirst">
-      Finance student at <strong>UW-Madison</strong>, concentrating in financial planning.
-      Last summer I built client analysis tools at a wealth management firm in Chicago.
-      I am looking for a 2027 summer analyst seat.
-    </p>
-    <div class="hero-meta">
-      <div><span class="mono">Focus</span><span class="v">Fundamental, long-horizon investing</span></div>
-      <div><span class="mono">Building</span><span class="v">Screeners, valuation and trading tools</span></div>
-      <div><span class="mono">Open to</span><span class="v">2027 summer analyst roles</span></div>
+
+    <div class="facts">
+      <div><span class="label">Focus</span><span class="v">Fundamental, long-horizon investing</span></div>
+      <div><span class="label">Building</span><span class="v">Screeners, valuation and trading tools</span></div>
+      <div><span class="label">Open to</span><span class="v">2027 summer analyst roles</span></div>
     </div>
   </section>
 
   <section class="section" id="work">
-    <div class="section-head">
-      <h2>Selected work</h2>
-      <span class="mono" id="work-count">Eleven projects</span>
+    <div class="rail">
+      <p class="label">§ 01<br>Selected</p>
+      <div>
+        <h2 class="section-title">Four pieces of work</h2>
+        <p class="section-note">
+          Each of these started as something I was doing by hand. The figure above each one shows
+          how it actually works.
+        </p>
+      </div>
     </div>
 
-    <div class="filters" role="group" aria-label="Filter projects by category" id="filters"></div>
+    <div id="featured"></div>
 
-    <figure class="chart-card reveal" id="chart-card">
-      <div class="chart-top">
+    <div class="figure-block reveal">
+      <div class="rail">
+        <p class="label">Fig. 1</p>
         <div>
-          <h3 class="chart-title">When each thing got built</h3>
-          <p class="chart-sub">Nine builds across 2026, grouped by what they are for. Hover a point for detail, or select one to jump to it.</p>
+          <div class="fig-head">
+            <div>
+              <h3 class="section-title" style="font-size:1.25rem;margin:0">Build cadence, 2026</h3>
+              <p class="fig-cap">Nine builds across the year, grouped by what they are for. Hover a point for detail, or select one to jump to it.</p>
+            </div>
+            <button class="view-toggle" id="view-toggle" type="button" aria-expanded="false">Table</button>
+          </div>
+
+          <div id="plot-wrap">
+            <div class="plot" id="plot"></div>
+            <div class="axis" id="axis"></div>
+            <p class="fig-note">One further entry sits outside this window: the client reporting pipeline was built during a 2025 internship.</p>
+          </div>
+
+          <div class="table-scroll" id="table-wrap" hidden>
+            <table class="data-table">
+              <thead><tr><th scope="col">Project</th><th scope="col">Category</th><th scope="col">Started</th></tr></thead>
+              <tbody id="table-body"></tbody>
+            </table>
+          </div>
         </div>
-        <button class="view-toggle" id="view-toggle" type="button" aria-expanded="false">Table view</button>
       </div>
+    </div>
+  </section>
 
-      <div id="plot-wrap">
-        <div class="plot" id="plot"></div>
-        <div class="axis" id="axis"></div>
-        <p class="chart-note">One further entry sits outside this window: the client reporting pipeline was built during a 2025 internship rather than in 2026.</p>
+  <section class="section" id="more">
+    <div class="rail">
+      <p class="label">§ 02<br>Index</p>
+      <div>
+        <h2 class="section-title">Also built</h2>
+        <p class="section-note">Smaller tools, trading systems and experiments, most of them still running on my own machine.</p>
+        <div class="index-list" id="index-list"></div>
       </div>
-
-      <div class="table-scroll" id="table-wrap" hidden>
-        <table class="data-table">
-          <caption>Every dated build, with its category and start date.</caption>
-          <thead><tr><th scope="col">Project</th><th scope="col">Category</th><th scope="col">Started</th></tr></thead>
-          <tbody id="table-body"></tbody>
-        </table>
-      </div>
-    </figure>
-
-    <div id="projects"></div>
+    </div>
   </section>
 
   <section class="section" id="about">
-    <div class="section-head">
-      <h2>About</h2>
-      <span class="mono">Background</span>
-    </div>
-    <div class="about-grid">
-      <dl class="aside reveal">
-        <dt>University of Wisconsin-Madison</dt>
-        <dd>Personal Finance, Financial Planning concentration</dd>
-        <dt>Previously</dt>
-        <dd>UW-La Crosse, Dean's List</dd>
-        <dt>Involved in</dt>
-        <dd>Financial Planning Association, Delta Sigma Pi</dd>
-      </dl>
+    <div class="rail">
+      <p class="label">§ 03<br>About</p>
       <div class="about-body reveal">
         <p>
           I am a fundamental investor before I am anything else. I hold for years rather than
@@ -734,510 +577,386 @@
         </p>
       </div>
     </div>
+
+    <div class="rail" style="margin-top:var(--s7)">
+      <p class="label">Record</p>
+      <dl class="cv reveal">
+        <dt>University of Wisconsin-Madison</dt>
+        <dd>Personal Finance, Financial Planning concentration</dd>
+        <dt>Involved in</dt>
+        <dd>Business AI Collective, Research Analyst on the faculty AI curriculum team<br>Delta Sigma Pi</dd>
+        <dt>Previously</dt>
+        <dd>UW-La Crosse, Dean's List<br>Financial Planning Association, Chapter Secretary, 2024 to 2026</dd>
+      </dl>
+    </div>
   </section>
 
-</main>
-
-<section class="contact" id="contact">
-  <div class="wrap">
-    <h2>If you are hiring for a 2027 summer analyst seat, I would like to talk.</h2>
-    <p>
-      I am also happy to hear from anyone building in this space, or from students who want to
-      compare notes on the financial planning track.
-    </p>
-    <div class="channels">
-      <a href="mailto:ericpeck05@gmail.com">ericpeck05@gmail.com</a>
-      <a href="https://www.linkedin.com/in/ericpeck28">LinkedIn</a>
-      <a href="https://github.com/ericpeck05">GitHub</a>
+  <section class="section contact" id="contact">
+    <div class="rail">
+      <p class="label">§ 04<br>Contact</p>
+      <div>
+        <h2>If you are hiring for a 2027 summer analyst seat, I would like to talk.</h2>
+        <p>
+          I am also happy to hear from anyone building in this space, or from students who want to
+          compare notes on the financial planning track.
+        </p>
+        <div class="channels">
+          <a href="mailto:ericpeck05@gmail.com">ericpeck05@gmail.com</a>
+          <a href="https://www.linkedin.com/in/ericpeck28">LinkedIn</a>
+          <a href="https://github.com/ericpeck05">GitHub</a>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<div class="wrap">
   <footer>
-    <span>Built and maintained by Eric Peck, 2026.</span>
-    <span><a href="https://github.com/ericpeck05/ericpeck05.github.io">Source of this page</a></span>
+    <div class="rail">
+      <p class="label">Colophon</p>
+      <p class="colophon">
+        Set in Newsreader and IBM Plex Mono. Written by hand, no framework, hosted on GitHub Pages.<br>
+        Figures drawn as inline SVG. <a href="https://github.com/ericpeck05/ericpeck05.github.io">Source of this page</a>.<br>
+        Eric Peck, 2026.
+      </p>
+    </div>
   </footer>
-</div>
+
+</main>
 
 <script>
 (function () {
   "use strict";
-
   document.documentElement.classList.add("js");
   var $ = function (s, r) { return (r || document).querySelector(s); };
 
   /* =========================================================
-     ARTWORK — one schematic per project, drawn from the thing
-     it actually does. Colour comes from the category token, so
-     every piece themes itself in light and dark.
+     FIGURES — ink line work, one accent mark apiece.
      ========================================================= */
 
-  var ART = {};
+  var FIG = {};
 
-  /* many candidates narrowed to a few survivors */
-  ART.screener = function () {
-    var rows = [12, 9, 6, 3, 2], y = 34, out = "";
-    rows.forEach(function (n, r) {
-      var last = r === rows.length - 1;
-      var w = 18, gap = 6, total = n * w + (n - 1) * gap, x0 = (320 - total) / 2;
+  /* a universe narrowed by named gates until a short list remains */
+  FIG.screener = function () {
+    var gates = ["Earnings", "PEG", "Debt / equity", "Insider buying", "Short list"];
+    var counts = [20, 14, 9, 5, 2];
+    var out = "", y = 8;
+    counts.forEach(function (n, r) {
+      var last = r === counts.length - 1;
       for (var i = 0; i < n; i++) {
-        var cls = last ? "art-c anim-fade" : "art-mute";
-        var delay = last ? ' style="animation-delay:' + (i * 0.4) + 's"' : "";
-        out += '<rect x="' + (x0 + i * (w + gap)) + '" y="' + y + '" width="' + w + '" height="11" rx="2" class="' + cls + '"' + delay + '/>';
+        out += '<rect x="' + (i * 14) + '" y="' + y + '" width="10" height="7" class="' +
+               (last ? "mark pop" : "ink-faint pop") + '" style="animation-delay:' + (r * 0.1 + i * 0.014).toFixed(2) + 's"/>';
       }
+      out += '<text x="420" y="' + (y + 6.5) + '" text-anchor="end" class="fig-type">' + gates[r].toUpperCase() + '</text>';
+      if (!last) out += '<line x1="0" y1="' + (y + 21) + '" x2="420" y2="' + (y + 21) + '" class="ink-rule"/>';
       y += 38;
     });
-    return '<svg viewBox="0 0 320 240" role="img" aria-label="A wide field of candidates narrowing row by row to two survivors">' +
-      '<path d="M44 52 L132 196 M276 52 L188 196" class="art-line"/>' + out + '</svg>';
+    return '<svg viewBox="0 0 420 176" role="img" aria-label="A universe of candidates narrowed by four named gates down to a short list of two">' + out + '</svg>';
   };
 
-  /* a DCF value bridge plus a WACC by growth sensitivity grid */
-  ART.valuation = function () {
+  /* a DCF bridge, and the grid of what the answer does under other assumptions */
+  FIG.valuation = function () {
+    /* magnitude is carried by size, in one ink, so the grid stays light on the page */
     var cells = "";
     for (var r = 0; r < 5; r++) {
       for (var c = 0; c < 5; c++) {
-        var op = 0.30 + ((4 - r) + c) / 8 * 0.70;
-        cells += '<rect x="' + (166 + c * 28) + '" y="' + (56 + r * 28) + '" width="24" height="24" rx="2" class="art-c" ' +
-                 'style="opacity:' + Math.min(1, op).toFixed(2) + '"/>';
+        var v = ((4 - r) + c) / 8;                 /* 0..1, rising toward low WACC and high growth */
+        var side = 5 + v * 20;
+        var cx = 230 + c * 31 + 13.5, cy = 22 + r * 31 + 13.5;
+        cells += '<rect x="' + (cx - side / 2).toFixed(1) + '" y="' + (cy - side / 2).toFixed(1) + '" width="' + side.toFixed(1) +
+                 '" height="' + side.toFixed(1) + '" class="pop" style="fill:var(--o-3);animation-delay:' + ((r * 5 + c) * 0.02).toFixed(2) + 's"/>';
       }
     }
-    var bars = "", hs = [104, 78, 60, 42, 124];
+    var bars = "", hs = [96, 72, 54, 38, 118];
     hs.forEach(function (h, k) {
-      bars += '<rect x="' + (32 + k * 24) + '" y="' + (198 - h) + '" width="18" height="' + h + '" rx="2" class="' +
-              (k === hs.length - 1 ? "art-c" : "art-mute") + '"/>';
+      bars += '<rect x="' + (2 + k * 28) + '" y="' + (176 - h) + '" width="16" height="' + h + '" class="' +
+              (k === hs.length - 1 ? "mark" : "ink-faint") + '"/>';
     });
-    return '<svg viewBox="0 0 320 240" role="img" aria-label="A discounted cash flow bar bridge beside a five by five sensitivity grid, base case marked">' +
-      bars + '<line x1="26" y1="198" x2="150" y2="198" class="art-line"/>' +
+    return '<svg viewBox="0 0 420 200" role="img" aria-label="A discounted cash flow bridge beside a sensitivity grid, WACC in rows and terminal growth in columns, base case outlined">' +
+      '<text x="0" y="10" class="fig-type">CASH FLOWS &#8594; VALUE</text>' +
+      bars +
+      '<line x1="0" y1="176" x2="150" y2="176" class="ink-rule"/>' +
+      '<text x="230" y="10" class="fig-type">SENSITIVITY</text>' +
       cells +
-      '<rect x="222" y="112" width="24" height="24" rx="2" fill="none" stroke="var(--ink)" stroke-width="2" class="anim-soft"/>' +
-      '<text x="166" y="212" class="art-ink" style="font:9px var(--mono);letter-spacing:.08em" fill="currentColor" opacity=".55">WACC</text>' +
-      '<text x="262" y="212" class="art-ink" style="font:9px var(--mono);letter-spacing:.08em" fill="currentColor" opacity=".55">GROWTH</text>' +
+      '<rect x="292" y="84" width="27" height="27" fill="none" stroke="var(--accent)" stroke-width="1.5"/>' +
+      '<text x="230" y="194" class="fig-type">ROWS WACC &#183; COLUMNS TERMINAL GROWTH</text>' +
       '</svg>';
   };
 
-  /* parcels scored around a substation */
-  ART.sitefinder = function () {
+  /* parcels, drawn as outlines, scored against a substation */
+  FIG.sitefinder = function () {
     var plots = [
-      [24,40,62,44],[92,40,54,44],[152,40,48,32],[206,40,44,44],[256,40,40,60],
-      [24,90,44,52],[74,90,72,38],[152,78,48,46],[206,90,44,40],
-      [24,148,62,52],[92,134,54,58],[152,130,48,62],[206,136,44,56],[256,106,40,86]
+      [0,22,78,46],[82,22,62,46],[148,22,58,34],[210,22,54,46],[268,22,48,62],[320,22,100,46],
+      [0,72,52,56],[56,72,88,40],[148,60,58,52],[210,72,54,44],[268,88,48,46],[320,72,100,56],
+      [0,132,78,52],[82,116,62,68],[148,116,58,68],[210,120,54,64],[268,138,48,46],[320,132,100,52]
     ];
-    var hi = [6, 10, 13];
+    var hi = [9, 14];
     var out = plots.map(function (p, i) {
       var on = hi.indexOf(i) !== -1;
-      return '<rect x="' + p[0] + '" y="' + p[1] + '" width="' + p[2] + '" height="' + p[3] + '" rx="2" class="' +
-             (on ? "art-c" : "art-mute") + '"' + (on ? ' style="opacity:.9"' : ' style="opacity:.55"') + '/>';
+      return '<rect x="' + (p[0] + 0.5) + '" y="' + (p[1] + 0.5) + '" width="' + (p[2] - 5) + '" height="' + (p[3] - 5) + '" class="' +
+             (on ? "mark pop" : "ink-hair pop") + '" style="animation-delay:' + (i * 0.028).toFixed(2) + 's' + (on ? "" : ";stroke:var(--o-1)") + '"/>';
     }).join("");
-    return '<svg viewBox="0 0 320 240" role="img" aria-label="A grid of land parcels with three scored highest and a substation radius">' +
+    return '<svg viewBox="0 0 420 208" role="img" aria-label="A map of land parcels, two scored highest, beside a marked substation">' +
+      '<text x="0" y="10" class="fig-type">DANE COUNTY PARCELS</text>' +
       out +
-      '<circle cx="168" cy="120" r="6" class="art-ink anim-ring" style="fill:var(--c);opacity:.5"/>' +
-      '<circle cx="168" cy="120" r="5" class="art-c"/>' +
-      '<line x1="24" y1="212" x2="296" y2="212" class="art-line"/>' +
-      '<rect x="24" y="220" width="72" height="5" rx="2" class="art-c"/>' +
-      '<rect x="104" y="220" width="44" height="5" rx="2" class="art-mute"/>' +
+      '<circle cx="174" cy="84" r="17" class="ink-hair"/>' +
+      '<circle cx="174" cy="84" r="9" class="ink-hair"/>' +
+      '<circle cx="174" cy="84" r="3" style="fill:var(--ink)"/>' +
+      '<text x="0" y="202" class="fig-type">SCORED 0&#8211;100 ON SLOPE, ZONING, COVERAGE, SUBSTATION DISTANCE</text>' +
       '</svg>';
   };
 
-  /* a morning screen of tiles with sparklines */
-  ART.dashboard = function () {
-    var spark = function (x, y, w, h, up, d) {
-      var pts = up ? "0,18 12,14 24,16 36,8 48,10 60,2" : "0,4 12,9 24,6 36,13 48,11 60,19";
-      return '<g transform="translate(' + x + ',' + y + ')">' +
-        '<rect x="0" y="-8" width="' + w + '" height="' + h + '" rx="3" class="art-mute" style="opacity:.5"/>' +
-        '<rect x="8" y="-2" width="26" height="4" rx="2" class="art-ink"/>' +
-        '<polyline points="' + pts + '" transform="translate(8,12)" class="art-cs anim-draw" style="animation-delay:' + d + 's"/>' +
-        '</g>';
-    };
-    return '<svg viewBox="0 0 320 240" role="img" aria-label="Four dashboard tiles, each with a small trend line">' +
-      '<rect x="24" y="22" width="272" height="14" rx="3" class="art-mute" style="opacity:.7"/>' +
-      spark(24, 62, 130, 72, true, 0) + spark(166, 62, 130, 72, false, 0.35) +
-      spark(24, 156, 130, 72, true, 0.7) + spark(166, 156, 130, 72, true, 1.05) +
-      '</svg>';
-  };
-
-  /* a ladder of resting orders that price walks through */
-  ART.gridbot = function () {
-    var lines = "", dots = "";
-    for (var i = 0; i < 9; i++) {
-      var y = 34 + i * 21;
-      lines += '<line x1="26" y1="' + y + '" x2="294" y2="' + y + '" class="art-line"/>';
-      var xs = [58 + (i % 4) * 34, 176 + (i % 3) * 38];
-      xs.forEach(function (x) {
-        dots += '<circle cx="' + x + '" cy="' + y + '" r="4.5" class="' + (i < 4 ? "art-mute" : "art-c") + '"/>';
-      });
-    }
-    /* a 160px period, finely sampled, so the 160px slide loops seamlessly */
-    var pts = [];
-    for (var x = -180; x <= 500; x += 8) {
-      var phase = ((x + 180) / 160) * Math.PI * 2;
-      pts.push(x + "," + (120 + Math.sin(phase) * 44).toFixed(1));
-    }
-    return '<svg viewBox="0 0 320 240" role="img" aria-label="A ladder of resting buy and sell orders with price working the range">' +
-      lines + dots +
-      '<g class="anim-slide"><polyline points="' + pts.join(" ") + '" class="art-cs"/></g>' +
-      '</svg>';
-  };
-
-  /* three z-scored inputs blended into one composite */
-  ART.signalbot = function () {
-    var rows = [46, -30, 22], out = "";
-    rows.forEach(function (v, i) {
-      var y = 44 + i * 42, mid = 160;
-      out += '<line x1="40" y1="' + y + '" x2="280" y2="' + y + '" class="art-line"/>' +
-             '<line x1="' + mid + '" y1="' + (y - 12) + '" x2="' + mid + '" y2="' + (y + 12) + '" class="art-line"/>' +
-             '<rect x="' + (v > 0 ? mid : mid + v) + '" y="' + (y - 7) + '" width="' + Math.abs(v) + '" height="14" rx="3" class="art-c anim-soft" ' +
-             'style="animation-delay:' + (i * 0.6) + 's"/>';
-    });
-    return '<svg viewBox="0 0 320 240" role="img" aria-label="Three z-scored inputs above one blended composite signal">' +
-      out +
-      '<line x1="40" y1="186" x2="280" y2="186" class="art-line"/>' +
-      '<rect x="40" y="198" width="240" height="16" rx="4" class="art-mute" style="opacity:.55"/>' +
-      '<rect x="40" y="198" width="152" height="16" rx="4" class="art-c anim-rise"/>' +
-      '</svg>';
-  };
-
-  /* a local map of linked nodes */
-  ART.atlas = function () {
-    var n = [[76,64],[158,44],[236,78],[62,142],[142,116],[226,152],[104,196],[196,206],[272,128]];
-    var e = [[0,1],[1,2],[0,4],[1,4],[2,5],[3,4],[4,5],[3,6],[4,6],[5,7],[6,7],[2,8],[5,8]];
-    var edges = e.map(function (p) {
-      return '<line x1="' + n[p[0]][0] + '" y1="' + n[p[0]][1] + '" x2="' + n[p[1]][0] + '" y2="' + n[p[1]][1] + '" class="art-line"/>';
-    }).join("");
-    var nodes = n.map(function (p, i) {
-      var big = i === 4 || i === 1;
-      return '<g class="anim-drift" style="animation-delay:' + (i * 0.7) + 's">' +
-        '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="' + (big ? 9 : 6) + '" class="' + (big ? "art-c" : "art-mute") + '"/></g>';
-    }).join("");
-    return '<svg viewBox="0 0 320 240" role="img" aria-label="A graph of linked notes, files and projects">' + edges + nodes + '</svg>';
-  };
-
-  /* a short thread where the agents disagree */
-  ART.groupchat = function () {
-    var bub = function (x, y, w, right, hue, d) {
-      return '<g style="animation-delay:' + d + 's" class="anim-soft">' +
-        '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="34" rx="9" class="art-mute" style="opacity:.6"/>' +
-        '<circle cx="' + (right ? x + w + 14 : x - 14) + '" cy="' + (y + 17) + '" r="7" class="art-c" style="fill:' + hue + '"/>' +
-        '<rect x="' + (x + 12) + '" y="' + (y + 11) + '" width="' + (w - 42) + '" height="5" rx="2" class="art-ink"/>' +
-        '<rect x="' + (x + 12) + '" y="' + (y + 21) + '" width="' + (w - 70) + '" height="5" rx="2" class="art-ink" style="opacity:.35"/>' +
-        '</g>';
-    };
-    return '<svg viewBox="0 0 320 240" role="img" aria-label="A short group chat thread between three differently coloured agents">' +
-      bub(48, 30, 150, false, "var(--s-1)", 0) +
-      bub(110, 82, 162, true, "var(--s-2)", 0.5) +
-      bub(48, 134, 140, false, "var(--s-3)", 1) +
-      '<g transform="translate(120,196)">' +
-      '<circle cx="0" cy="0" r="5" class="art-ink anim-fade" style="animation-delay:0s"/>' +
-      '<circle cx="18" cy="0" r="5" class="art-ink anim-fade" style="animation-delay:.25s"/>' +
-      '<circle cx="36" cy="0" r="5" class="art-ink anim-fade" style="animation-delay:.5s"/>' +
-      '</g></svg>';
-  };
-
-  /* a model answering on the machine itself */
-  ART.neuralos = function () {
-    return '<svg viewBox="0 0 320 240" role="img" aria-label="A desktop window running a language model locally">' +
-      '<rect x="30" y="34" width="260" height="172" rx="8" class="art-mute" style="opacity:.45"/>' +
-      '<line x1="30" y1="62" x2="290" y2="62" class="art-line"/>' +
-      '<circle cx="46" cy="48" r="4" class="art-ink"/><circle cx="60" cy="48" r="4" class="art-ink"/><circle cx="74" cy="48" r="4" class="art-ink"/>' +
-      '<rect x="48" y="82" width="120" height="7" rx="3" class="art-ink"/>' +
-      '<rect x="48" y="100" width="180" height="7" rx="3" class="art-c anim-fade"/>' +
-      '<rect x="48" y="118" width="148" height="7" rx="3" class="art-c anim-fade" style="animation-delay:.4s"/>' +
-      '<rect x="48" y="136" width="96" height="7" rx="3" class="art-c anim-fade" style="animation-delay:.8s"/>' +
-      '<rect x="48" y="168" width="196" height="22" rx="5" class="art-mute" style="opacity:.7"/>' +
-      '<rect x="58" y="174" width="2" height="10" class="art-c anim-blink"/>' +
-      '<rect x="236" y="166" width="26" height="26" rx="5" class="art-cs" style="fill:none"/>' +
-      '<rect x="244" y="174" width="10" height="10" rx="2" class="art-c"/>' +
-      '</svg>';
-  };
-
-  /* an export becoming a deck and a write-up */
-  ART.pipeline = function () {
+  /* an export becoming the deck and the write-up */
+  FIG.pipeline = function () {
     var rows = "";
-    for (var i = 0; i < 6; i++) {
-      rows += '<rect x="30" y="' + (56 + i * 20) + '" width="72" height="10" rx="2" class="art-mute"/>';
+    for (var i = 0; i < 8; i++) {
+      rows += '<rect x="0" y="' + (22 + i * 18) + '" width="100" height="9" class="ink-faint pop" style="animation-delay:' + (i * 0.05) + 's"/>';
     }
-    var flow = "";
-    for (var k = 0; k < 3; k++) {
-      flow += '<rect x="118" y="100" width="18" height="8" rx="2" class="art-c anim-fall" style="animation-delay:' + (k * 1.2) + 's"/>';
-    }
-    return '<svg viewBox="0 0 320 240" role="img" aria-label="A brokerage export flowing into a finished deck and write-up">' +
+    return '<svg viewBox="0 0 420 200" role="img" aria-label="A brokerage export flowing into a finished review deck and a written commentary">' +
+      '<text x="0" y="10" class="fig-type">BROKERAGE EXPORT</text>' +
       rows +
-      '<line x1="112" y1="120" x2="164" y2="120" class="art-line"/>' +
-      '<path d="M158 114 L166 120 L158 126" class="art-cs"/>' + flow +
-      '<rect x="180" y="44" width="110" height="74" rx="4" class="art-mute" style="opacity:.55"/>' +
-      '<rect x="192" y="56" width="52" height="7" rx="3" class="art-ink"/>' +
-      '<rect x="192" y="72" width="86" height="34" rx="3" class="art-c" style="opacity:.75"/>' +
-      '<rect x="180" y="132" width="110" height="80" rx="4" class="art-mute" style="opacity:.55"/>' +
-      '<rect x="192" y="146" width="64" height="6" rx="3" class="art-ink"/>' +
-      '<rect x="192" y="162" width="86" height="5" rx="2" class="art-ink" style="opacity:.4"/>' +
-      '<rect x="192" y="176" width="78" height="5" rx="2" class="art-ink" style="opacity:.4"/>' +
-      '<rect x="192" y="190" width="58" height="5" rx="2" class="art-ink" style="opacity:.4"/>' +
+      '<path d="M118 90 L166 90 M158 83 L166 90 L158 97" class="mark-s"/>' +
+      '<text x="190" y="10" class="fig-type">REVIEW DECK</text>' +
+      '<rect x="190.5" y="18.5" width="229" height="74" class="ink-hair" style="stroke:var(--o-1)"/>' +
+      '<rect x="204" y="32" width="74" height="8" style="fill:var(--ink-3)"/>' +
+      '<rect x="204" y="48" width="120" height="30" class="mark"/>' +
+      '<text x="190" y="116" class="fig-type">COMMENTARY</text>' +
+      '<rect x="190.5" y="124.5" width="229" height="70" class="ink-hair" style="stroke:var(--o-1)"/>' +
+      '<rect x="204" y="138" width="62" height="7" style="fill:var(--ink-3)"/>' +
+      '<rect x="204" y="154" width="196" height="5" class="ink-faint"/>' +
+      '<rect x="204" y="166" width="184" height="5" class="ink-faint"/>' +
+      '<rect x="204" y="178" width="138" height="5" class="ink-faint"/>' +
       '</svg>';
   };
+
+  var G = {};
+  G.dashboard = '<svg viewBox="0 0 64 48" aria-hidden="true"><rect x="2" y="4" width="60" height="5" class="ink-faint"/><rect x="2" y="14" width="28" height="30" fill="none" class="g-line"/><rect x="34" y="14" width="28" height="30" fill="none" class="g-line"/><polyline points="7,34 13,28 19,31 25,21" class="mark-s"/><polyline points="39,24 45,31 51,27 57,34" class="ink-hair"/></svg>';
+  G.gridbot   = '<svg viewBox="0 0 64 48" aria-hidden="true"><line x1="2" y1="10" x2="62" y2="10" class="g-line"/><line x1="2" y1="19" x2="62" y2="19" class="g-line"/><line x1="2" y1="28" x2="62" y2="28" class="g-line"/><line x1="2" y1="37" x2="62" y2="37" class="g-line"/><path d="M2 32 C 12 10, 22 38, 32 16 C 42 36, 52 12, 62 26" class="mark-s"/></svg>';
+  G.signalbot = '<svg viewBox="0 0 64 48" aria-hidden="true"><line x1="32" y1="4" x2="32" y2="44" class="g-line"/><rect x="32" y="9" width="20" height="7" class="ink-faint"/><rect x="18" y="21" width="14" height="7" class="ink-faint"/><rect x="32" y="33" width="24" height="7" class="mark"/></svg>';
+  G.atlas     = '<svg viewBox="0 0 64 48" aria-hidden="true"><line x1="14" y1="14" x2="32" y2="24" class="g-line"/><line x1="32" y1="24" x2="52" y2="12" class="g-line"/><line x1="32" y1="24" x2="20" y2="38" class="g-line"/><line x1="32" y1="24" x2="50" y2="36" class="g-line"/><circle cx="14" cy="14" r="3.5" class="ink-fill"/><circle cx="52" cy="12" r="3.5" class="ink-fill"/><circle cx="20" cy="38" r="3.5" class="ink-fill"/><circle cx="50" cy="36" r="3.5" class="ink-fill"/><circle cx="32" cy="24" r="5" class="mark"/></svg>';
+  G.groupchat = '<svg viewBox="0 0 64 48" aria-hidden="true"><rect x="4" y="6" width="38" height="11" rx="3" class="ink-faint"/><rect x="22" y="22" width="38" height="11" rx="3" class="mark"/><rect x="4" y="38" width="30" height="7" rx="3" class="ink-faint"/></svg>';
+  G.neuralos  = '<svg viewBox="0 0 64 48" aria-hidden="true"><rect x="3" y="6" width="58" height="36" fill="none" class="g-line"/><line x1="3" y1="15" x2="61" y2="15" class="g-line"/><circle cx="9" cy="10.5" r="1.6" class="ink-fill"/><circle cx="15" cy="10.5" r="1.6" class="ink-fill"/><rect x="9" y="21" width="30" height="4" class="ink-faint"/><rect x="9" y="29" width="22" height="4" class="mark"/></svg>';
 
   /* =========================================================
      DATA
      ========================================================= */
 
-  var CATEGORIES = [
-    { key: "investing", label: "Investing tools",        series: "var(--s-1)" },
-    { key: "trading",   label: "Trading systems",        series: "var(--s-2)" },
-    { key: "software",  label: "Software & tooling",     series: "var(--s-3)" },
-    { key: "business",  label: "Client work",            series: "var(--s-4)" }
-  ];
-
+  var CATS = {
+    investing: { label: "Investing tools",    series: "var(--s-1)" },
+    trading:   { label: "Trading systems",    series: "var(--s-2)" },
+    software:  { label: "Software & tooling", series: "var(--s-3)" },
+    client:    { label: "Client work",        series: "var(--ink-3)" }
+  };
   var CHART_CATS = ["investing", "trading", "software"];
 
-  var PROJECTS = [
+  var FEATURED = [
     {
-      title: "Lynch-style stock screener", art: "screener", cat: "investing", date: "2026-08-12",
+      id: "screener", fig: "screener", title: "Lynch-style stock screener",
+      cat: "investing", date: "2026-08-12",
       does: "Runs a whole US equity universe through Peter Lynch's rules and hands back a short list, with the reason every rejected name failed.",
-      meta: "Python · SEC company facts · Form 4 filings",
-      body: "A screen built around the things Peter Lynch actually paid attention to: earnings growth measured against the multiple, debt load, and whether the business is simple enough to explain. It pulls fundamentals, ranks what comes back, and leaves me with a short list worth reading in full rather than a wall of tickers.",
+      stack: "Python · SEC company facts · Form 4 filings",
+      body: "A screen built around the things Lynch actually paid attention to: earnings growth measured against the multiple, debt load, and whether the business is simple enough to explain. The part I am proudest of is the backtest section, where roughly two dozen rule variants were tested and none of them beat simply holding SPY. I left that finding in the repository rather than deleting it.",
       links: [["Source on GitHub", "https://github.com/ericpeck05/lynch-screener"]]
     },
     {
-      title: "AI sector valuation tool", art: "valuation", cat: "investing", date: "2026-03-04",
-      does: "Values the large-cap AI names with a two-stage DCF, cross-checks it against comparables, and shows how the answer moves across WACC and terminal growth.",
-      meta: "Python · Streamlit · DCF and comparables",
-      body: "A two-stage DCF with a comparables cross-check and a sensitivity grid across WACC and terminal growth, pointed at the large-cap AI names. I built it to answer a question I kept arguing about with people, which is whether the sector is expensive, in a way that forced me to write down my assumptions instead of gesturing at them.",
+      id: "valuation", fig: "valuation", title: "AI sector valuation tool",
+      cat: "investing", date: "2026-03-04",
+      does: "Values the large-cap AI names with a two-stage DCF, cross-checks against comparables, and shows how the answer moves across WACC and terminal growth.",
+      stack: "Python · Streamlit · DCF and comparables",
+      body: "I built it to answer a question I kept arguing about, which is whether the sector is expensive, in a way that forced me to write down my assumptions instead of gesturing at them. The sensitivity grid is the honest part: it shows how much of the answer is the model and how much is the inputs.",
       links: [["Source on GitHub", "https://github.com/ericpeck05/bubble-or-not"]]
     },
     {
-      title: "Data center site finder", art: "sitefinder", cat: "investing", date: "2026-05-08",
-      does: "Scores all 60,000 parcels in Dane County for data center siting on size, slope, zoning and distance to a substation, then maps the winners.",
-      meta: "Python · SpatiaLite · public county and USGS data",
-      body: "Scores every parcel in Dane County for behind-the-meter data center development: size, slope, zoning, land use, building coverage, and distance to a substation, weighted into one number out of 100 and drawn on a map. Power availability is the real constraint on the AI buildout, and working through the siting problem with public data taught me more about that than reading about it did.",
+      id: "sitefinder", fig: "sitefinder", title: "Data center site finder",
+      cat: "investing", date: "2026-05-08",
+      does: "Scores every parcel in Dane County for data center siting on size, slope, zoning and distance to a substation, then maps the winners.",
+      stack: "Python · SpatiaLite · public county and USGS data",
+      body: "Power availability is the real constraint on the AI buildout, and the only honest way to understand a siting decision is to try making it yourself with the same public data everyone else has. Every input is public: county parcel and zoning records, building footprints, HIFLD substations, USGS elevation for slope.",
       links: [["Source on GitHub", "https://github.com/ericpeck05/btm-site-finder"]]
     },
     {
-      title: "Morning market dashboard", art: "dashboard", cat: "investing", date: "2026-02-20",
-      does: "Puts index levels, sector moves and my watchlist on one page, so the pre-class check takes a glance instead of five tabs.",
-      meta: "HTML · CSS · JavaScript · live market data",
-      body: "One page I open before class. Index levels, sector moves, and the handful of names I follow, arranged so nothing needs a click. I built it because checking five tabs every morning was a worse use of ten minutes than reading was.",
-      links: []
-    },
-    {
-      title: "Grid trading bot", art: "gridbot", cat: "trading", date: "2026-03-01",
-      does: "Lays a ladder of buy and sell orders across a price range and works it as price moves, with a full paper exchange so it can run without real money.",
-      meta: "Python · Coinbase and Binance.US · no dependencies",
-      body: "A strategy that ladders buy and sell orders across a price range and works the grid as price moves through it. I built it to see how execution costs, fees, and slippage chew through a strategy that looks clean in a backtest. That gap is the actual lesson. I wrote it twice: once on Coinbase, then again for Binance with no dependencies at all.",
-      links: [
-        ["SOL grid bot on GitHub", "https://github.com/ericpeck05/sol-grid-bot"],
-        ["Binance version", "https://github.com/ericpeck05/binance-grid-bot"]
-      ]
-    },
-    {
-      title: "Crypto signal research bot", art: "signalbot", cat: "trading", date: "2026-03-02",
-      does: "Turns funding rates, on-chain metrics and sentiment into one comparable signal per asset, backtests it, and will only trade through a risk layer that can halt itself.",
-      meta: "Python · SQLite · scikit-learn",
-      body: "Collects perpetual futures funding rates, on-chain metrics and social sentiment on a schedule, turns each into a z-score so they are comparable, and blends them into one directional signal per asset. It trains and backtests on that signal, and routes orders only through a risk layer with position caps, stops, a daily loss limit and a drawdown kill switch. Most of the work was the risk layer, which was the lesson.",
-      links: [["Source on GitHub", "https://github.com/ericpeck05/crypto-signal-bot"]]
-    },
-    {
-      title: "Atlas", art: "atlas", cat: "software", date: "2026-09-05",
-      does: "Draws my projects, notes, files and calendar as one linked map that runs on my own machine and uploads nothing.",
-      meta: "Python · local-first · no dependencies",
-      body: "A map of my projects, notes, files and calendar in one view that runs entirely on my own machine. Everything I was working on lived in a different place and none of those places knew about each other. Rather than move my life into somebody's server, I built something that reaches out to where things already are and stores its state as JSON I can read.",
-      links: [["Source on GitHub", "https://github.com/ericpeck05/atlas"]]
-    },
-    {
-      title: "Multi-agent group chat", art: "groupchat", cat: "software", date: "2026-06-04",
-      does: "Argues back. A roster of agents with different priors, and a moderator that pulls in whoever disagrees with what you just said.",
-      meta: "Next.js · TypeScript · local Ollama models",
-      body: "A group chat with a roster of AI agents that hold different views, plus a moderator that deliberately pulls in whoever disagrees with what you just said. One assistant tends to agree with you, which is the opposite of useful when you are testing a thesis. It runs against a model on my own machine, so nothing leaves the laptop.",
-      links: [["Source on GitHub", "https://github.com/ericpeck05/local-agent-group-chat"]]
-    },
-    {
-      title: "NeuralOS", art: "neuralos", cat: "software", date: "2026-03-11",
-      does: "A native macOS front end for language models running on the machine itself, rather than on somebody else's server.",
-      meta: "Swift · SwiftUI · macOS",
-      body: "A macOS app I am building in SwiftUI, born out of running language models locally on my own machine instead of sending everything to someone else's server.",
-      links: []
-    },
-    {
-      title: "Client reporting pipeline", art: "pipeline", cat: "business", date: null,
-      does: "Reads a brokerage export and produces the portfolio review deck and its companion write-up in firm brand, turning an afternoon into a few minutes.",
-      meta: "Python · python-pptx · python-docx",
-      body: "During my internship, portfolio review decks were assembled by hand from brokerage exports. I wrote a workflow that reads the export and produces the deck plus the companion write-up in firm brand, which turned an afternoon of formatting into a few minutes and left more room for the analysis itself.",
+      id: "pipeline", fig: "pipeline", title: "Client reporting pipeline",
+      cat: "client", date: null,
+      does: "Reads a brokerage export and produces the portfolio review deck and its companion write-up in firm brand, turning an afternoon of formatting into a few minutes.",
+      stack: "Python · python-pptx · python-docx",
+      body: "During my internship, portfolio review decks were assembled by hand from brokerage exports. Automating it left more room for the analysis itself, which was the point. It is also the piece of work here that someone other than me depended on.",
       links: []
     }
   ];
 
-  var catOf = function (k) {
-    for (var i = 0; i < CATEGORIES.length; i++) { if (CATEGORIES[i].key === k) return CATEGORIES[i]; }
-    return CATEGORIES[0];
-  };
+  var INDEX = [
+    { glyph: "gridbot", title: "Grid trading bot", cat: "trading", date: "2026-03-01",
+      line: "Ladders buy and sell orders across a price range and works the grid as price moves, with a full paper exchange so it runs without real money.",
+      stack: "Python · Coinbase and Binance.US · no dependencies",
+      links: [["Coinbase →", "https://github.com/ericpeck05/sol-grid-bot"],
+              ["Binance →", "https://github.com/ericpeck05/binance-grid-bot"]] },
+    { glyph: "signalbot", title: "Crypto signal research bot", cat: "trading", date: "2026-03-02",
+      line: "Turns funding rates, on-chain metrics and sentiment into one comparable signal per asset, backtests it, and will only trade through a risk layer that can halt itself.",
+      stack: "Python · SQLite · scikit-learn",
+      href: "https://github.com/ericpeck05/crypto-signal-bot" },
+    { glyph: "atlas", title: "Atlas", cat: "software", date: "2026-09-05",
+      line: "Draws my projects, notes, files and calendar as one linked map that runs on my own machine and uploads nothing.",
+      stack: "Python · local-first · no dependencies",
+      href: "https://github.com/ericpeck05/atlas" },
+    { glyph: "groupchat", title: "Multi-agent group chat", cat: "software", date: "2026-06-04",
+      line: "Argues back. A roster of agents with different priors, and a moderator that pulls in whoever disagrees with what you just said.",
+      stack: "Next.js · TypeScript · local Ollama models",
+      href: "https://github.com/ericpeck05/local-agent-group-chat" },
+    { glyph: "dashboard", title: "Morning market dashboard", cat: "investing", date: "2026-02-20",
+      line: "Index levels, sector moves and my watchlist on one page, so the pre-class check takes a glance instead of five tabs.",
+      stack: "HTML · CSS · JavaScript · live market data",
+      href: null },
+    { glyph: "neuralos", title: "NeuralOS", cat: "software", date: "2026-03-11",
+      line: "A native macOS front end for language models running on the machine itself, rather than on somebody else's server.",
+      stack: "Swift · SwiftUI · macOS",
+      href: null }
+  ];
+
+  var ALL = FEATURED.concat(INDEX);
 
   /* =========================================================
      THEME
      ========================================================= */
 
-  var root = document.documentElement;
-  var toggle = $("#theme-toggle");
-  var themeLabel = $("#theme-label");
-
+  var root = document.documentElement, toggle = $("#theme-toggle"), themeLabel = $("#theme-label");
   function store(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
   function read(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
   function systemDark() { return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches; }
-
   function currentlyDark() {
-    var stamp = root.getAttribute("data-theme");
-    if (stamp === "dark") return true;
-    if (stamp === "light") return false;
-    return systemDark();
+    var s = root.getAttribute("data-theme");
+    return s === "dark" ? true : s === "light" ? false : systemDark();
   }
-
   function syncLabel() {
-    var dark = currentlyDark();
-    themeLabel.textContent = dark ? "Dark" : "Light";
-    toggle.setAttribute("aria-label", dark ? "Switch to light theme" : "Switch to dark theme");
-    document.body.setAttribute("data-mode", dark ? "dark" : "light");
+    var d = currentlyDark();
+    themeLabel.textContent = d ? "Dark" : "Light";
+    toggle.setAttribute("aria-label", d ? "Switch to light theme" : "Switch to dark theme");
+    document.body.setAttribute("data-mode", d ? "dark" : "light");
   }
-
   var saved = read("ep-theme");
   if (saved === "dark" || saved === "light") root.setAttribute("data-theme", saved);
   syncLabel();
-
   toggle.addEventListener("click", function () {
-    var next = currentlyDark() ? "light" : "dark";
-    root.setAttribute("data-theme", next);
-    store("ep-theme", next);
-    syncLabel();
+    var n = currentlyDark() ? "light" : "dark";
+    root.setAttribute("data-theme", n); store("ep-theme", n); syncLabel();
   });
-
   if (window.matchMedia) {
     var mq = window.matchMedia("(prefers-color-scheme: dark)");
-    var onChange = function () { if (!root.getAttribute("data-theme")) syncLabel(); };
-    if (mq.addEventListener) mq.addEventListener("change", onChange);
-    else if (mq.addListener) mq.addListener(onChange);
+    var oc = function () { if (!root.getAttribute("data-theme")) syncLabel(); };
+    if (mq.addEventListener) mq.addEventListener("change", oc); else if (mq.addListener) mq.addListener(oc);
   }
 
   /* =========================================================
-     FILTERS
+     FEATURED WORK
      ========================================================= */
 
-  var active = "all";
-  var filterBox = $("#filters");
+  var fWrap = $("#featured");
 
-  function chip(key, label, colour) {
-    var b = document.createElement("button");
-    b.className = "chip";
-    b.type = "button";
-    b.setAttribute("aria-pressed", key === active ? "true" : "false");
-    b.dataset.key = key;
-    if (colour) {
-      var sw = document.createElement("span");
-      sw.className = "swatch";
-      sw.style.background = colour;
-      b.appendChild(sw);
-    }
-    b.appendChild(document.createTextNode(label));
-    b.addEventListener("click", function () { setFilter(key); });
-    return b;
-  }
+  FEATURED.forEach(function (p, i) {
+    var sec = document.createElement("div");
+    sec.className = "featured rail reveal";
+    sec.id = "p-" + p.id;
 
-  filterBox.appendChild(chip("all", "All work", null));
-  CATEGORIES.forEach(function (c) { filterBox.appendChild(chip(c.key, c.label, c.series)); });
+    var lab = document.createElement("p");
+    lab.className = "label";
+    lab.textContent = String(i + 1).padStart(2, "0") + " / 04";
 
-  function setFilter(key) {
-    active = key;
-    Array.prototype.forEach.call(filterBox.children, function (b) {
-      b.setAttribute("aria-pressed", b.dataset.key === active ? "true" : "false");
-    });
-    applyFilter();
-  }
+    var col = document.createElement("div");
 
-  /* =========================================================
-     PROJECT LIST
-     ========================================================= */
-
-  var list = $("#projects");
-
-  PROJECTS.forEach(function (p, i) {
-    var c = catOf(p.cat);
-    var art = document.createElement("article");
-    art.className = "project reveal";
-    art.dataset.cat = p.cat;
-    art.id = "p-" + i;
-    art.style.setProperty("--c", c.series);
-
-    var figure = document.createElement("div");
-    figure.className = "thumb";
-    figure.innerHTML = (ART[p.art] || function () { return ""; })();
-
-    var right = document.createElement("div");
-
-    var head = document.createElement("div");
-    head.className = "p-head";
-    var idx = document.createElement("span");
-    idx.className = "p-index";
-    idx.textContent = String(i + 1).padStart(2, "0");
-    var tag = document.createElement("span");
-    tag.className = "p-cat";
-    var sw = document.createElement("span");
-    sw.className = "swatch";
-    tag.appendChild(sw);
-    tag.appendChild(document.createTextNode(c.label));
-    head.appendChild(idx);
-    head.appendChild(tag);
+    var figure = document.createElement("figure");
+    figure.className = "fig";
+    figure.innerHTML = (FIG[p.fig] || function () { return ""; })();
 
     var h3 = document.createElement("h3");
+    h3.className = "f-title";
     h3.textContent = p.title;
 
     var does = document.createElement("p");
-    does.className = "p-does";
+    does.className = "f-does";
     does.textContent = p.does;
 
-    var meta = document.createElement("p");
-    meta.className = "meta";
-    meta.textContent = p.meta;
-
     var body = document.createElement("p");
-    body.className = "body";
+    body.className = "f-body";
     body.textContent = p.body;
 
-    right.appendChild(head);
-    right.appendChild(h3);
-    right.appendChild(does);
-    right.appendChild(meta);
-    right.appendChild(body);
+    var stack = document.createElement("p");
+    stack.className = "f-stack";
+    stack.textContent = p.stack;
+
+    col.appendChild(figure);
+    col.appendChild(h3);
+    col.appendChild(does);
+    col.appendChild(body);
+    col.appendChild(stack);
 
     if (p.links.length) {
       var lw = document.createElement("p");
-      lw.className = "project-links";
+      lw.className = "links";
       p.links.forEach(function (l) {
-        var a = document.createElement("a");
-        a.href = l[1];
-        a.textContent = l[0];
-        lw.appendChild(a);
+        var a = document.createElement("a"); a.href = l[1]; a.textContent = l[0]; lw.appendChild(a);
       });
-      right.appendChild(lw);
+      col.appendChild(lw);
     }
 
-    art.appendChild(figure);
-    art.appendChild(right);
-    list.appendChild(art);
+    sec.appendChild(lab);
+    sec.appendChild(col);
+    fWrap.appendChild(sec);
   });
 
   /* =========================================================
-     TIMELINE
+     INDEX
      ========================================================= */
 
-  var T0 = new Date("2026-02-01").getTime();
-  var T1 = new Date("2026-09-30").getTime();
-  var MONTHS = ["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"];
+  var iWrap = $("#index-list");
 
-  function pct(dateStr) {
-    var t = new Date(dateStr + "T00:00:00").getTime();
-    return ((t - T0) / (T1 - T0)) * 100;
-  }
+  INDEX.forEach(function (p) {
+    var row = document.createElement("article");
+    row.className = "entry reveal";
+    row.id = "p-" + p.glyph;
 
-  var plot = $("#plot");
-  var axis = $("#axis");
+    var g = document.createElement("div");
+    g.className = "glyph";
+    g.innerHTML = G[p.glyph] || "";
+
+    var mid = document.createElement("div");
+    var h3 = document.createElement("h3"); h3.textContent = p.title;
+    var ln = document.createElement("p"); ln.textContent = p.line;
+    var st = document.createElement("p"); st.className = "stack"; st.textContent = p.stack;
+    mid.appendChild(h3); mid.appendChild(ln); mid.appendChild(st);
+
+    row.appendChild(g);
+    row.appendChild(mid);
+
+    if (p.links) {
+      var box = document.createElement("div");
+      box.className = "go-stack";
+      p.links.forEach(function (l) {
+        var x = document.createElement("a");
+        x.className = "go"; x.href = l[1]; x.textContent = l[0];
+        box.appendChild(x);
+      });
+      row.appendChild(box);
+    } else if (p.href) {
+      var a = document.createElement("a");
+      a.className = "go"; a.href = p.href; a.textContent = "GitHub →";
+      row.appendChild(a);
+    } else {
+      var sp = document.createElement("span");
+      sp.className = "stack stack-right"; sp.style.marginTop = "0"; sp.textContent = "Local";
+      row.appendChild(sp);
+    }
+
+    iWrap.appendChild(row);
+  });
+
+  /* =========================================================
+     FIG. 1 — build cadence
+     ========================================================= */
+
+  var T0 = new Date("2026-02-01").getTime(), T1 = new Date("2026-09-30").getTime();
+  var MONTHS = ["Feb","Mar","Apr","May","Jun","Jul","Aug","Sep"];
+  function pct(d) { return ((new Date(d + "T00:00:00").getTime() - T0) / (T1 - T0)) * 100; }
+
+  var plot = $("#plot"), axis = $("#axis");
   var tip = document.createElement("div");
-  tip.className = "tip";
-  tip.setAttribute("role", "status");
+  tip.className = "tip"; tip.setAttribute("role", "status");
   plot.appendChild(tip);
 
   var dots = [];
@@ -1246,35 +965,26 @@
   plot.appendChild(gridLayer);
 
   CHART_CATS.forEach(function (key) {
-    var c = catOf(key);
-    var lane = document.createElement("div");
-    lane.className = "lane";
+    var c = CATS[key];
+    var lane = document.createElement("div"); lane.className = "lane";
 
-    var label = document.createElement("span");
-    label.className = "lane-label";
-    var sw = document.createElement("span");
-    sw.className = "swatch";
-    sw.style.background = c.series;
-    label.appendChild(sw);
-    label.appendChild(document.createTextNode(c.label));
+    var label = document.createElement("span"); label.className = "lane-label";
+    var sw = document.createElement("span"); sw.className = "swatch"; sw.style.background = c.series;
+    label.appendChild(sw); label.appendChild(document.createTextNode(c.label));
     lane.appendChild(label);
 
-    var track = document.createElement("div");
-    track.className = "lane-track";
+    var track = document.createElement("div"); track.className = "lane-track";
 
-    var inLane = [];
-    PROJECTS.forEach(function (p, i) {
-      if (p.cat === key && p.date) inLane.push({ p: p, i: i, x: pct(p.date) });
-    });
-    inLane.sort(function (a, b) { return a.x - b.x; });
+    var inLane = ALL.filter(function (p) { return p.cat === key && p.date; })
+                    .map(function (p) { return { p: p, x: pct(p.date) }; })
+                    .sort(function (a, b) { return a.x - b.x; });
 
     var group = [], dy = {};
-    var flush = function () {
-      var n = group.length;
-      var step = n > 1 ? Math.min(14, 40 / (n - 1)) : 0;
-      group.forEach(function (g, k) { dy[g.i] = (k - (n - 1) / 2) * step; });
+    function flush() {
+      var n = group.length, step = n > 1 ? Math.min(14, 40 / (n - 1)) : 0;
+      group.forEach(function (g, k) { dy[g.p.title] = (k - (n - 1) / 2) * step; });
       group = [];
-    };
+    }
     inLane.forEach(function (d) {
       if (group.length && d.x - group[group.length - 1].x > 2.2) flush();
       group.push(d);
@@ -1282,20 +992,18 @@
     flush();
 
     inLane.forEach(function (d) {
-      var p = d.p, i = d.i;
+      var p = d.p;
       var b = document.createElement("button");
-      b.className = "dot";
-      b.type = "button";
+      b.className = "dot"; b.type = "button";
       b.style.left = d.x + "%";
-      b.style.marginTop = (-13 + (dy[i] || 0)) + "px";
+      b.style.marginTop = (-13 + (dy[p.title] || 0)) + "px";
       b.style.setProperty("--c", c.series);
-      b.dataset.cat = key;
       b.setAttribute("aria-label", p.title + ", " + c.label + ", started " + longDate(p.date));
       b.addEventListener("mouseenter", function () { showTip(b, p, c); });
       b.addEventListener("focus", function () { showTip(b, p, c); });
       b.addEventListener("mouseleave", hideTip);
       b.addEventListener("blur", hideTip);
-      b.addEventListener("click", function () { jumpTo(i); });
+      b.addEventListener("click", function () { jumpTo(p); });
       track.appendChild(b);
       dots.push(b);
     });
@@ -1309,144 +1017,64 @@
   axis.appendChild(axisInner);
 
   MONTHS.forEach(function (m, i) {
-    var d = "2026-" + String(i + 2).padStart(2, "0") + "-01";
-    var x = pct(d);
-
-    var g = document.createElement("div");
-    g.className = "gridline";
-    g.style.left = x + "%";
+    var x = pct("2026-" + String(i + 2).padStart(2, "0") + "-01");
+    var g = document.createElement("div"); g.className = "gridline"; g.style.left = x + "%";
     gridLayer.appendChild(g);
-
     var t = document.createElement("span");
     t.className = "tick" + (i === 0 ? " is-first" : "");
-    t.style.left = x + "%";
-    t.textContent = m;
+    t.style.left = x + "%"; t.textContent = m;
     axisInner.appendChild(t);
   });
 
-  function longDate(s) {
-    return new Date(s + "T00:00:00").toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
-  }
-  function shortDate(s) {
-    return new Date(s + "T00:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
-  }
+  function longDate(s) { return new Date(s + "T00:00:00").toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }); }
+  function shortDate(s) { return new Date(s + "T00:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }); }
 
   function showTip(el, p, c) {
     tip.innerHTML = "";
-    var n = document.createElement("span");
-    n.className = "t-name";
-    n.textContent = p.title;
-    var m = document.createElement("span");
-    m.className = "t-meta";
-    m.textContent = c.label + " · " + shortDate(p.date);
-    tip.appendChild(n);
-    tip.appendChild(m);
-
-    var pr = plot.getBoundingClientRect();
-    var er = el.getBoundingClientRect();
+    var n = document.createElement("span"); n.className = "t-name"; n.textContent = p.title;
+    var m = document.createElement("span"); m.className = "t-meta"; m.textContent = c.label + " · " + shortDate(p.date);
+    tip.appendChild(n); tip.appendChild(m);
+    var pr = plot.getBoundingClientRect(), er = el.getBoundingClientRect();
     tip.style.left = (er.left - pr.left + er.width / 2) + "px";
     tip.style.top = (er.top - pr.top - 6) + "px";
     tip.style.transform = "translate(-50%, -100%)";
     tip.classList.add("is-on");
     el.classList.add("is-active");
   }
-
   function hideTip() {
     tip.classList.remove("is-on");
     dots.forEach(function (d) { d.classList.remove("is-active"); });
   }
-
-  function jumpTo(i) {
-    var el = document.getElementById("p-" + i);
-    if (!el) return;
-    el.scrollIntoView({ behavior: "smooth", block: "center" });
-    el.classList.add("is-flash");
-    setTimeout(function () { el.classList.remove("is-flash"); }, 1400);
+  function jumpTo(p) {
+    var el = document.getElementById("p-" + (p.id || p.glyph));
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
   }
-
-  /* =========================================================
-     TABLE VIEW TWIN
-     ========================================================= */
 
   var tbody = $("#table-body");
+  ALL.filter(function (p) { return p.date; })
+     .sort(function (a, b) { return a.date < b.date ? -1 : 1; })
+     .forEach(function (p) {
+       var tr = document.createElement("tr");
+       var th = document.createElement("th"); th.setAttribute("scope", "row"); th.textContent = p.title;
+       var t1 = document.createElement("td"); t1.textContent = CATS[p.cat].label;
+       var t2 = document.createElement("td"); t2.className = "num"; t2.textContent = shortDate(p.date);
+       tr.appendChild(th); tr.appendChild(t1); tr.appendChild(t2);
+       tbody.appendChild(tr);
+     });
 
-  function drawTable() {
-    tbody.innerHTML = "";
-    PROJECTS.filter(function (p) { return p.date; })
-      .filter(function (p) { return active === "all" || p.cat === active; })
-      .sort(function (a, b) { return a.date < b.date ? -1 : 1; })
-      .forEach(function (p) {
-        var tr = document.createElement("tr");
-        var th = document.createElement("th");
-        th.setAttribute("scope", "row");
-        th.textContent = p.title;
-        var td1 = document.createElement("td");
-        td1.textContent = catOf(p.cat).label;
-        var td2 = document.createElement("td");
-        td2.className = "num";
-        td2.textContent = shortDate(p.date);
-        tr.appendChild(th); tr.appendChild(td1); tr.appendChild(td2);
-        tbody.appendChild(tr);
-      });
-  }
-
-  drawTable();
-
-  var viewBtn = $("#view-toggle");
-  var plotWrap = $("#plot-wrap");
-  var tableWrap = $("#table-wrap");
-
+  var viewBtn = $("#view-toggle"), plotWrap = $("#plot-wrap"), tableWrap = $("#table-wrap");
   viewBtn.addEventListener("click", function () {
     var showTable = plotWrap.hidden === false;
     plotWrap.hidden = showTable;
     tableWrap.hidden = !showTable;
-    viewBtn.textContent = showTable ? "Chart view" : "Table view";
+    viewBtn.textContent = showTable ? "Chart" : "Table";
     viewBtn.setAttribute("aria-expanded", showTable ? "true" : "false");
   });
 
   /* =========================================================
-     FILTER APPLICATION
+     SCROLL + REVEAL
      ========================================================= */
 
-  var emptyNote = document.createElement("p");
-  emptyNote.className = "empty-note";
-  emptyNote.textContent = "No dated builds in this category. The entry below sits outside the 2026 window.";
-  emptyNote.hidden = true;
-  plotWrap.insertBefore(emptyNote, plotWrap.firstChild);
-
-  function numberWord(n) {
-    var w = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven"];
-    return w[n] || String(n);
-  }
-
-  function applyFilter() {
-    dots.forEach(function (d) {
-      d.classList.toggle("is-dimmed", active !== "all" && d.dataset.cat !== active);
-    });
-
-    Array.prototype.forEach.call(list.children, function (art) {
-      art.classList.toggle("is-hidden", active !== "all" && art.dataset.cat !== active);
-    });
-
-    var visible = PROJECTS.filter(function (p) { return active === "all" || p.cat === active; }).length;
-    $("#work-count").textContent = visible === 1 ? "One project" : numberWord(visible) + " projects";
-
-    var anyDots = CHART_CATS.indexOf(active) !== -1 || active === "all";
-    plot.hidden = !anyDots;
-    axis.hidden = !anyDots;
-    emptyNote.hidden = anyDots;
-
-    drawTable();
-    hideTip();
-  }
-
-  applyFilter();
-
-  /* =========================================================
-     SCROLL + MOTION
-     ========================================================= */
-
-  var bar = $("#progress");
   var masthead = $("#masthead");
   var navLinks = Array.prototype.slice.call(document.querySelectorAll(".nav a"));
   var ticking = false;
@@ -1455,50 +1083,31 @@
     if (ticking) return;
     ticking = true;
     window.requestAnimationFrame(function () {
-      var h = document.documentElement.scrollHeight - window.innerHeight;
       var y = window.scrollY || window.pageYOffset;
-      bar.style.width = (h > 0 ? (y / h) * 100 : 0) + "%";
-      masthead.classList.toggle("is-stuck", y > 12);
-
+      masthead.classList.toggle("is-stuck", y > 8);
       var here = "";
       navLinks.forEach(function (a) {
-        var sec = document.querySelector(a.getAttribute("href"));
-        if (sec && sec.getBoundingClientRect().top <= 140) here = a.getAttribute("href");
+        var s = document.querySelector(a.getAttribute("href"));
+        if (s && s.getBoundingClientRect().top <= 160) here = a.getAttribute("href");
       });
       navLinks.forEach(function (a) { a.classList.toggle("is-current", a.getAttribute("href") === here); });
       ticking = false;
     });
   }
-
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  var aura = $("#aura");
-  aura.classList.add("is-on");
-
-  /* pointer parallax on the hero wash — pointer devices only */
-  if (!reduce && window.matchMedia && window.matchMedia("(pointer: fine)").matches) {
-    var hero = $(".hero");
-    hero.addEventListener("pointermove", function (e) {
-      var r = hero.getBoundingClientRect();
-      var dx = (e.clientX - r.left) / r.width - 0.5;
-      var dy = (e.clientY - r.top) / r.height - 0.5;
-      aura.style.transform = "translate3d(" + (dx * -26) + "px," + (dy * -18) + "px,0)";
-    });
-    hero.addEventListener("pointerleave", function () { aura.style.transform = ""; });
-  }
-
   if (!reduce && "IntersectionObserver" in window) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e, n) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e, n) {
         if (!e.isIntersecting) return;
         var el = e.target;
-        setTimeout(function () { el.classList.add("is-in"); }, n * 55);
+        setTimeout(function () { el.classList.add("is-in"); }, n * 50);
         io.unobserve(el);
       });
-    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+    }, { rootMargin: "0px 0px -6% 0px", threshold: 0.06 });
     document.querySelectorAll(".reveal").forEach(function (el) { io.observe(el); });
   } else {
     document.querySelectorAll(".reveal").forEach(function (el) { el.classList.add("is-in"); });
