@@ -26,6 +26,13 @@
     --rule-2:   #EFECE5;
     --accent:   #1B4F8F;
 
+    /* a signature hue per featured piece: a soft field and a saturated mark */
+    --tint-blue:   #E8F0FC;  --acc-blue:   #1F5FBF;
+    --tint-indigo: #EEECFB;  --acc-indigo: #4B3FB5;
+    --tint-teal:   #E2F3EE;  --acc-teal:   #0E7C6B;
+    --tint-amber:  #FAEFDD;  --acc-amber:  #A65E0E;
+    --band:        #10294D;  --band-ink:   #F4F6FA;
+
     /* the only hues on the page — they encode categories in Fig. 1 */
     --s-1: #2a78d6;
     --s-2: #eb6834;
@@ -45,7 +52,7 @@
     --gutter: clamp(1.5rem, 4vw, 4.5rem);
     --maxw: 104rem;
     --rail: 9rem;
-    --ease: cubic-bezier(0.22, 0.68, 0.25, 1);
+    --ease: cubic-bezier(0.28, 0.11, 0.32, 1);
   }
 
   @media (prefers-color-scheme: dark) {
@@ -58,6 +65,12 @@
       --rule:    #262A31;
       --rule-2:  #1B1E24;
       --accent:  #7FB0F0;
+
+      --tint-blue:   #111C2E;  --acc-blue:   #74ABF7;
+      --tint-indigo: #19172E;  --acc-indigo: #A39AF2;
+      --tint-teal:   #0E2320;  --acc-teal:   #52CDB6;
+      --tint-amber:  #271D0F;  --acc-amber:  #E8A857;
+      --band:        #142A4C;  --band-ink:   #ECEAE5;
 
       --s-1: #3987e5; --s-2: #d95926; --s-3: #199e70;
       --ring: var(--paper);
@@ -75,6 +88,12 @@
     --rule:    #262A31;
     --rule-2:  #1B1E24;
     --accent:  #7FB0F0;
+
+    --tint-blue:   #111C2E;  --acc-blue:   #74ABF7;
+    --tint-indigo: #19172E;  --acc-indigo: #A39AF2;
+    --tint-teal:   #0E2320;  --acc-teal:   #52CDB6;
+    --tint-amber:  #271D0F;  --acc-amber:  #E8A857;
+    --band:        #142A4C;  --band-ink:   #ECEAE5;
 
     --s-1: #3987e5; --s-2: #d95926; --s-3: #199e70;
     --ring: var(--paper);
@@ -190,7 +209,50 @@
     margin: 0; max-width: 21ch;
     text-wrap: balance;
   }
-  .statement em { font-style: italic; }
+  .statement em {
+    font-style: italic;
+    padding-right: 0.06em;
+    background: linear-gradient(100deg, var(--acc-blue) 10%, var(--acc-indigo) 90%);
+    -webkit-background-clip: text; background-clip: text;
+    color: transparent;
+  }
+
+  /* the hero recedes as you scroll past it */
+  @media (prefers-reduced-motion: no-preference) {
+    .js .hero-inner {
+      opacity: calc(1 - var(--hp, 0) * 0.82);
+      transform: translateY(calc(var(--hp, 0) * -30px)) scale(calc(1 - var(--hp, 0) * 0.035));
+      transform-origin: 20% 40%;
+      will-change: transform, opacity;
+    }
+    .js .hero-lower > * { opacity: 0; animation: fadeUp 1000ms var(--ease) forwards; }
+    .js .hero-lower > *:nth-child(1) { animation-delay: 420ms; }
+    .js .hero-lower > *:nth-child(2) { animation-delay: 560ms; }
+    .js .hero .label { opacity: 0; animation: fadeUp 900ms var(--ease) 100ms forwards; }
+  }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+  /* ---------- by the numbers ---------- */
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--s6) var(--s5);
+    background: var(--paper-2);
+    border-radius: clamp(18px, 2vw, 30px);
+    padding: clamp(1.75rem, 3.4vw, 3.25rem) clamp(1.5rem, 3.4vw, 3.5rem);
+    margin-bottom: clamp(3rem, 7vw, 5.5rem);
+    transition: background-color 500ms var(--ease);
+  }
+  .stat { display: flex; flex-direction: column; gap: var(--s3); }
+  .stat-num {
+    font-family: var(--serif); font-weight: 300;
+    font-size: clamp(2.6rem, 5.2vw, 4.75rem);
+    line-height: 0.95; letter-spacing: -0.035em;
+  }
+  .stat-num.is-counting { font-variant-numeric: tabular-nums; }
+  .stat .label { max-width: 24ch; }
+  @media (max-width: 820px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
   .lede {
     font-size: clamp(1.0625rem, 0.45vw + 1rem, 1.25rem);
@@ -234,12 +296,34 @@
 
   .section-title {
     font-family: var(--serif); font-weight: 400;
-    font-size: clamp(1.5rem, 2.2vw, 1.9rem);
-    letter-spacing: -0.012em; margin: 0 0 var(--s4);
+    font-size: clamp(1.9rem, 3.4vw, 3.1rem); font-weight: 300;
+    line-height: 1.08; letter-spacing: -0.024em; margin: 0 0 var(--s4);
   }
   .section-note { color: var(--ink-2); max-width: 46ch; margin: 0; font-size: 1rem; }
 
   /* ---------- featured work ---------- */
+
+  .hue-blue   { --tint: var(--tint-blue);   --accent: var(--acc-blue); }
+  .hue-indigo { --tint: var(--tint-indigo); --accent: var(--acc-indigo); }
+  .hue-teal   { --tint: var(--tint-teal);   --accent: var(--acc-teal); }
+  .hue-amber  { --tint: var(--tint-amber);  --accent: var(--acc-amber); }
+
+  .tile {
+    background: var(--tint, var(--paper-2));
+    border-radius: clamp(18px, 2vw, 30px);
+    padding: clamp(1.5rem, 3.4vw, 3.5rem);
+    transition: background-color 500ms var(--ease);
+  }
+
+  /* each tile settles into place, and its figure assembles, as you scroll it into view */
+  @media (prefers-reduced-motion: no-preference) {
+    .js .tile {
+      transform: translateY(calc((1 - var(--p, 1)) * 46px)) scale(calc(0.95 + 0.05 * var(--p, 1)));
+      transform-origin: 50% 70%;
+      will-change: transform;
+    }
+    .js .b { opacity: clamp(0, calc(var(--p, 1) * var(--n, 1) - var(--i, 0)), 1); }
+  }
 
   .featured { margin-top: var(--s8); }
   .featured + .featured { margin-top: clamp(3.5rem, 8vw, 6rem); }
@@ -250,12 +334,12 @@
     gap: var(--s6) clamp(2rem, 6vw, 7rem);
     align-items: start;
   }
-  .fig { background: none; border: 0; margin: 0; padding-top: var(--s2); }
+  .fig { background: none; border: 0; margin: 0; }
   .fig svg { display: block; width: 100%; height: auto; }
 
   @media (max-width: 820px) {
     .f-grid { grid-template-columns: 1fr; }
-    .fig { order: -1; max-width: 34rem; padding-top: 0; }
+    .f-grid > .tile { order: -1; }
   }
 
   .f-title {
@@ -291,6 +375,7 @@
   /* ---------- the index of everything else ---------- */
 
   .index-list {
+    isolation: isolate;
     margin-top: var(--s6);
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -306,8 +391,20 @@
     align-items: start;
     padding-block: var(--s5);
     border-top: 1px solid var(--rule-2);
+    position: relative;
   }
-  .entry .glyph { margin-top: var(--s1); }
+  .entry::before {
+    content: ""; position: absolute; inset: 0 calc(var(--s4) * -1);
+    background: var(--paper-2); border-radius: 14px;
+    opacity: 0; transform: scale(0.985);
+    transition: opacity 450ms var(--ease), transform 450ms var(--ease);
+    z-index: -1;
+  }
+  .entry:hover::before { opacity: 1; transform: none; }
+  .entry .glyph { margin-top: var(--s1); transition: transform 450ms var(--ease); }
+  .entry:hover .glyph { transform: scale(1.08); }
+  .entry .go { display: inline-block; }
+  .entry:hover .go { transform: translateX(3px); }
 
   .entry .glyph { width: 56px; height: 42px; }
   .entry .glyph svg { display: block; width: 100%; height: 100%; }
@@ -325,7 +422,7 @@
     font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.06em;
     color: var(--accent); text-decoration: none; white-space: nowrap;
     border-bottom: 1px solid transparent; padding-bottom: 2px;
-    transition: border-color 250ms var(--ease);
+    transition: border-color 250ms var(--ease), transform 450ms var(--ease);
   }
   .entry .go:hover { border-bottom-color: var(--accent); }
   .go-stack { display: flex; flex-direction: column; align-items: flex-end; gap: var(--s2); }
@@ -379,7 +476,10 @@
   .dot::after {
     content: ""; position: absolute; inset: 9px; border-radius: 50%;
     background: var(--c); box-shadow: 0 0 0 2px var(--ring);
-    transition: inset 200ms var(--ease);
+    transition: inset 200ms var(--ease), transform 600ms cubic-bezier(0.34, 1.4, 0.5, 1) var(--d, 0ms);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .js .figure-block:not(.is-in) .dot::after { transform: scale(0); }
   }
   .dot:hover::after, .dot:focus-visible::after, .dot.is-active::after { inset: 6px; }
 
@@ -430,6 +530,11 @@
   .split.is-end { align-items: end; }
   @media (max-width: 820px) { .split { grid-template-columns: 1fr; } .split.is-end { align-items: start; } }
 
+  /* the opening paragraph inks in word by word as it is read */
+  @media (prefers-reduced-motion: no-preference) {
+    .js .scrub .w { opacity: clamp(0.2, calc(var(--tp, 1) * var(--wn, 1) - var(--w, 0)), 1); }
+  }
+
   .cv { margin: 0; }
   .cv-label { margin-bottom: var(--s4); }
   .cv dt { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); margin-top: var(--s5); }
@@ -438,26 +543,35 @@
 
   /* ---------- contact ---------- */
 
+  .contact { border-top: 0; padding-top: 0; }
+  .contact-tile {
+    background: var(--band); color: var(--band-ink);
+    border-radius: clamp(18px, 2vw, 30px);
+    padding: clamp(2rem, 5vw, 5rem) clamp(1.5rem, 4.4vw, 4.5rem);
+    transition: background-color 500ms var(--ease);
+  }
+  .contact-tile .label { color: color-mix(in srgb, var(--band-ink) 55%, transparent); margin-bottom: var(--s6); }
   .contact h2 {
     font-family: var(--serif); font-weight: 300;
     font-size: clamp(1.6rem, 3.4vw, 2.6rem); line-height: 1.16;
     letter-spacing: -0.022em; margin: 0 0 var(--s4); max-width: 22ch; text-wrap: balance;
   }
-  .contact p { max-width: 44ch; margin: 0; color: var(--ink-2); }
+  .contact h2 { font-size: clamp(1.8rem, 3.8vw, 3.4rem); }
+  .contact p:not(.label) { max-width: 44ch; margin: 0; color: color-mix(in srgb, var(--band-ink) 72%, transparent); }
 
   .channels { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s4); }
   @media (max-width: 820px) { .channels { flex-direction: row; flex-wrap: wrap; gap: var(--s5); } }
   .channels a {
     font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.04em;
-    text-decoration: none; color: var(--ink);
-    border-bottom: 1px solid var(--rule);
+    text-decoration: none; color: var(--band-ink);
+    border-bottom: 1px solid color-mix(in srgb, var(--band-ink) 30%, transparent);
     padding-bottom: 3px;
-    transition: border-color 250ms var(--ease);
+    transition: border-color 300ms var(--ease), transform 450ms var(--ease);
   }
-  .channels a:hover { border-bottom-color: var(--accent); }
+  .channels a:hover { border-bottom-color: var(--band-ink); transform: translateX(4px); }
 
   footer {
-    border-top: 1px solid var(--rule);
+    border-top: 0;
     padding-block: var(--s6);
     padding-bottom: calc(var(--s6) + env(safe-area-inset-bottom, 0px));
   }
@@ -477,12 +591,6 @@
   .mark       { fill: var(--accent); }
   .mark-s     { stroke: var(--accent); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
   .fig-type   { font-family: var(--mono); font-size: 8px; letter-spacing: 0.1em; fill: var(--ink-3); }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .pop { opacity: 0; }
-    .is-in .pop { animation: pop 520ms var(--ease) forwards; }
-  }
-  @keyframes pop { to { opacity: 1; } }
 
   /* ---------- reveal ---------- */
 
@@ -520,7 +628,7 @@
 <main class="wrap" id="top">
 
   <section class="hero">
-    <div class="rail">
+    <div class="rail hero-inner" id="hero-inner">
       <p class="label">Finance<br>UW&#8209;Madison</p>
       <div>
         <h1 class="statement">
@@ -544,6 +652,13 @@
     </div>
   </section>
 
+  <div class="stats reveal" id="stats" aria-label="By the numbers">
+    <div class="stat"><span class="stat-num" data-to="9">9</span><span class="label">Builds shipped in 2026</span></div>
+    <div class="stat"><span class="stat-num" data-to="8">8</span><span class="label">Open-source repositories</span></div>
+    <div class="stat"><span class="stat-num" data-to="60" data-suffix="k">60k</span><span class="label">Land parcels scored</span></div>
+    <div class="stat"><span class="stat-num" data-to="24">24</span><span class="label">Screen variants backtested</span></div>
+  </div>
+
   <section class="section" id="work">
     <div class="rail">
       <p class="label">§ 01<br>Selected</p>
@@ -564,7 +679,7 @@
         <div>
           <div class="fig-head">
             <div>
-              <h3 class="section-title" style="font-size:1.25rem;margin:0">Build cadence, 2026</h3>
+              <h3 class="section-title" style="font-size:1.4rem;font-weight:400;letter-spacing:-0.012em;margin:0">Build cadence, 2026</h3>
               <p class="fig-cap">Nine builds across the year, grouped by what they are for. Hover a point for detail, or select one to jump to it.</p>
             </div>
             <button class="view-toggle" id="view-toggle" type="button" aria-expanded="false">Table</button>
@@ -603,7 +718,7 @@
       <p class="label">§ 03<br>About</p>
       <div class="split">
         <div class="about-body reveal">
-          <p>
+          <p class="scrub" id="scrub">
             I am a fundamental investor before I am anything else. I hold for years rather than
             quarters, I want to understand a business well enough to describe it to someone who has
             never heard of it, and I would rather read the filing than the headline about the filing.
@@ -635,8 +750,8 @@
   </section>
 
   <section class="section contact" id="contact">
-    <div class="rail">
-      <p class="label">§ 04<br>Contact</p>
+    <div class="contact-tile reveal">
+      <p class="label">§ 04 &nbsp;Contact</p>
       <div class="split is-end">
         <div>
           <h2>If you are hiring for a 2027 summer analyst seat, I would like to talk.</h2>
@@ -679,7 +794,10 @@
 
   var FIG = {};
 
-  /* a universe narrowed by named gates until a short list remains */
+  /* Each element carries --i, its place in the build order. The tile sets --p
+     (0 to 1) from scroll position, and CSS reveals elements as p passes them. */
+  function B(i) { return ' style="--i:' + (+i).toFixed(2) + '"'; }
+
   FIG.screener = function () {
     var gates = ["Earnings", "PEG", "Debt / equity", "Insider buying", "Short list"];
     var counts = [20, 14, 9, 5, 2];
@@ -687,46 +805,43 @@
     counts.forEach(function (n, r) {
       var last = r === counts.length - 1;
       for (var i = 0; i < n; i++) {
-        out += '<rect x="' + (i * 14) + '" y="' + y + '" width="10" height="7" class="' +
-               (last ? "mark pop" : "ink-faint pop") + '" style="animation-delay:' + (r * 0.1 + i * 0.014).toFixed(2) + 's"/>';
+        out += '<rect x="' + (i * 14) + '" y="' + y + '" width="10" height="7" class="b ' +
+               (last ? "mark" : "ink-faint") + '"' + B(r + (i / n) * 0.7) + '/>';
       }
-      out += '<text x="420" y="' + (y + 6.5) + '" text-anchor="end" class="fig-type">' + gates[r].toUpperCase() + '</text>';
-      if (!last) out += '<line x1="0" y1="' + (y + 21) + '" x2="420" y2="' + (y + 21) + '" class="ink-rule"/>';
+      out += '<text x="420" y="' + (y + 6.5) + '" text-anchor="end" class="fig-type b"' + B(r) + '>' + gates[r].toUpperCase() + '</text>';
+      if (!last) out += '<line x1="0" y1="' + (y + 21) + '" x2="420" y2="' + (y + 21) + '" class="ink-rule b"' + B(r + 0.6) + '/>';
       y += 38;
     });
-    return '<svg viewBox="0 0 420 176" role="img" aria-label="A universe of candidates narrowed by four named gates down to a short list of two">' + out + '</svg>';
+    return '<svg viewBox="0 0 420 176" style="--n:5.9" role="img" aria-label="A universe of candidates narrowed by four named gates down to a short list of two">' + out + '</svg>';
   };
 
-  /* a DCF bridge, and the grid of what the answer does under other assumptions */
   FIG.valuation = function () {
-    /* magnitude is carried by size, in one ink, so the grid stays light on the page */
     var cells = "";
     for (var r = 0; r < 5; r++) {
       for (var c = 0; c < 5; c++) {
-        var v = ((4 - r) + c) / 8;                 /* 0..1, rising toward low WACC and high growth */
+        var v = ((4 - r) + c) / 8;
         var side = 5 + v * 20;
         var cx = 230 + c * 31 + 13.5, cy = 22 + r * 31 + 13.5;
         cells += '<rect x="' + (cx - side / 2).toFixed(1) + '" y="' + (cy - side / 2).toFixed(1) + '" width="' + side.toFixed(1) +
-                 '" height="' + side.toFixed(1) + '" class="pop" style="fill:var(--o-3);animation-delay:' + ((r * 5 + c) * 0.02).toFixed(2) + 's"/>';
+                 '" height="' + side.toFixed(1) + '" class="b" style="fill:var(--o-3);--i:' + (2.6 + ((4 - r) * 5 + c) / 25 * 2.4).toFixed(2) + '"/>';
       }
     }
     var bars = "", hs = [96, 72, 54, 38, 118];
     hs.forEach(function (h, k) {
-      bars += '<rect x="' + (2 + k * 28) + '" y="' + (176 - h) + '" width="16" height="' + h + '" class="' +
-              (k === hs.length - 1 ? "mark" : "ink-faint") + '"/>';
+      bars += '<rect x="' + (2 + k * 28) + '" y="' + (176 - h) + '" width="16" height="' + h + '" class="b ' +
+              (k === hs.length - 1 ? "mark" : "ink-faint") + '"' + B(0.3 + k * 0.45) + '/>';
     });
-    return '<svg viewBox="0 0 420 200" role="img" aria-label="A discounted cash flow bridge beside a sensitivity grid, WACC in rows and terminal growth in columns, base case outlined">' +
-      '<text x="0" y="10" class="fig-type">CASH FLOWS &#8594; VALUE</text>' +
+    return '<svg viewBox="0 0 420 200" style="--n:6.6" role="img" aria-label="A discounted cash flow bridge beside a sensitivity grid of WACC against terminal growth, base case outlined">' +
+      '<text x="0" y="10" class="fig-type b"' + B(0) + '>CASH FLOWS &#8594; VALUE</text>' +
       bars +
-      '<line x1="0" y1="176" x2="150" y2="176" class="ink-rule"/>' +
-      '<text x="230" y="10" class="fig-type">SENSITIVITY</text>' +
+      '<line x1="0" y1="176" x2="150" y2="176" class="ink-rule b"' + B(0) + '/>' +
+      '<text x="230" y="10" class="fig-type b"' + B(2.4) + '>SENSITIVITY</text>' +
       cells +
-      '<rect x="292" y="84" width="27" height="27" fill="none" stroke="var(--accent)" stroke-width="1.5"/>' +
-      '<text x="230" y="194" class="fig-type">WACC &#215; TERMINAL GROWTH</text>' +
+      '<rect x="292" y="84" width="27" height="27" fill="none" stroke="var(--accent)" stroke-width="1.5" class="b"' + B(5.3) + '/>' +
+      '<text x="230" y="194" class="fig-type b"' + B(5.3) + '>WACC &#215; TERMINAL GROWTH</text>' +
       '</svg>';
   };
 
-  /* parcels, drawn as outlines, scored against a substation */
   FIG.sitefinder = function () {
     var plots = [
       [0,22,78,46],[82,22,62,46],[148,22,58,34],[210,22,54,46],[268,22,48,62],[320,22,100,46],
@@ -734,41 +849,42 @@
       [0,132,78,52],[82,116,62,68],[148,116,58,68],[210,120,54,64],[268,138,48,46],[320,132,100,52]
     ];
     var hi = [9, 14];
-    var out = plots.map(function (p, i) {
+    var out = plots.map(function (pl, i) {
       var on = hi.indexOf(i) !== -1;
-      return '<rect x="' + (p[0] + 0.5) + '" y="' + (p[1] + 0.5) + '" width="' + (p[2] - 5) + '" height="' + (p[3] - 5) + '" class="' +
-             (on ? "mark pop" : "ink-hair pop") + '" style="animation-delay:' + (i * 0.028).toFixed(2) + 's' + (on ? "" : ";stroke:var(--o-1)") + '"/>';
+      var box = 'x="' + (pl[0] + 0.5) + '" y="' + (pl[1] + 0.5) + '" width="' + (pl[2] - 5) + '" height="' + (pl[3] - 5) + '"';
+      var s = '<rect ' + box + ' class="ink-hair b" style="stroke:var(--o-1);--i:' + (0.2 + i / 18 * 2.8).toFixed(2) + '"/>';
+      if (on) s += '<rect ' + box + ' class="mark b"' + B(4.5 + hi.indexOf(i) * 0.5) + '/>';
+      return s;
     }).join("");
-    return '<svg viewBox="0 0 420 208" role="img" aria-label="A map of land parcels, two scored highest, beside a marked substation">' +
-      '<text x="0" y="10" class="fig-type">DANE COUNTY PARCELS</text>' +
+    return '<svg viewBox="0 0 420 208" style="--n:6.6" role="img" aria-label="A map of land parcels, two scored highest, beside a marked substation">' +
+      '<text x="0" y="10" class="fig-type b"' + B(0) + '>DANE COUNTY PARCELS</text>' +
       out +
-      '<circle cx="174" cy="84" r="17" class="ink-hair"/>' +
-      '<circle cx="174" cy="84" r="9" class="ink-hair"/>' +
-      '<circle cx="174" cy="84" r="3" style="fill:var(--ink)"/>' +
-      '<text x="0" y="202" class="fig-type">SCORED 0&#8211;100 ON SLOPE, ZONING, COVERAGE, SUBSTATION DISTANCE</text>' +
+      '<circle cx="174" cy="84" r="3" class="b" style="fill:var(--ink);--i:3.2"/>' +
+      '<circle cx="174" cy="84" r="9" class="ink-hair b"' + B(3.5) + '/>' +
+      '<circle cx="174" cy="84" r="17" class="ink-hair b"' + B(3.8) + '/>' +
+      '<text x="0" y="202" class="fig-type b"' + B(5.4) + '>SCORED 0&#8211;100 ON SLOPE, ZONING, COVERAGE, SUBSTATION DISTANCE</text>' +
       '</svg>';
   };
 
-  /* an export becoming the deck and the write-up */
   FIG.pipeline = function () {
     var rows = "";
     for (var i = 0; i < 8; i++) {
-      rows += '<rect x="0" y="' + (22 + i * 18) + '" width="100" height="9" class="ink-faint pop" style="animation-delay:' + (i * 0.05) + 's"/>';
+      rows += '<rect x="0" y="' + (22 + i * 18) + '" width="100" height="9" class="ink-faint b"' + B(0.2 + i * 0.22) + '/>';
     }
-    return '<svg viewBox="0 0 420 200" role="img" aria-label="A brokerage export flowing into a finished review deck and a written commentary">' +
-      '<text x="0" y="10" class="fig-type">BROKERAGE EXPORT</text>' +
+    return '<svg viewBox="0 0 420 200" style="--n:6.2" role="img" aria-label="A brokerage export flowing into a finished review deck and a written commentary">' +
+      '<text x="0" y="10" class="fig-type b"' + B(0) + '>BROKERAGE EXPORT</text>' +
       rows +
-      '<path d="M118 90 L166 90 M158 83 L166 90 L158 97" class="mark-s"/>' +
-      '<text x="190" y="10" class="fig-type">REVIEW DECK</text>' +
-      '<rect x="190.5" y="18.5" width="229" height="74" class="ink-hair" style="stroke:var(--o-1)"/>' +
-      '<rect x="204" y="32" width="74" height="8" style="fill:var(--ink-3)"/>' +
-      '<rect x="204" y="48" width="120" height="30" class="mark"/>' +
-      '<text x="190" y="116" class="fig-type">COMMENTARY</text>' +
-      '<rect x="190.5" y="124.5" width="229" height="70" class="ink-hair" style="stroke:var(--o-1)"/>' +
-      '<rect x="204" y="138" width="62" height="7" style="fill:var(--ink-3)"/>' +
-      '<rect x="204" y="154" width="196" height="5" class="ink-faint"/>' +
-      '<rect x="204" y="166" width="184" height="5" class="ink-faint"/>' +
-      '<rect x="204" y="178" width="138" height="5" class="ink-faint"/>' +
+      '<path d="M118 90 L166 90 M158 83 L166 90 L158 97" class="mark-s b"' + B(2.3) + '/>' +
+      '<text x="190" y="10" class="fig-type b"' + B(3) + '>REVIEW DECK</text>' +
+      '<rect x="190.5" y="18.5" width="229" height="74" class="ink-hair b" style="stroke:var(--o-1);--i:3"/>' +
+      '<rect x="204" y="32" width="74" height="8" class="b" style="fill:var(--ink-3);--i:3.3"/>' +
+      '<rect x="204" y="48" width="120" height="30" class="mark b"' + B(3.7) + '/>' +
+      '<text x="190" y="116" class="fig-type b"' + B(4.2) + '>COMMENTARY</text>' +
+      '<rect x="190.5" y="124.5" width="229" height="70" class="ink-hair b" style="stroke:var(--o-1);--i:4.2"/>' +
+      '<rect x="204" y="138" width="62" height="7" class="b" style="fill:var(--ink-3);--i:4.5"/>' +
+      '<rect x="204" y="154" width="196" height="5" class="ink-faint b"' + B(4.75) + '/>' +
+      '<rect x="204" y="166" width="184" height="5" class="ink-faint b"' + B(4.95) + '/>' +
+      '<rect x="204" y="178" width="138" height="5" class="ink-faint b"' + B(5.15) + '/>' +
       '</svg>';
   };
 
@@ -794,7 +910,7 @@
 
   var FEATURED = [
     {
-      id: "screener", fig: "screener", title: "Lynch-style stock screener",
+      id: "screener", fig: "screener", hue: "blue", title: "Lynch-style stock screener",
       cat: "investing", date: "2026-08-12",
       does: "Runs a whole US equity universe through Peter Lynch's rules and hands back a short list, with the reason every rejected name failed.",
       stack: "Python · SEC company facts · Form 4 filings",
@@ -802,7 +918,7 @@
       links: [["Source on GitHub", "https://github.com/ericpeck05/lynch-screener"]]
     },
     {
-      id: "valuation", fig: "valuation", title: "AI sector valuation tool",
+      id: "valuation", fig: "valuation", hue: "indigo", title: "AI sector valuation tool",
       cat: "investing", date: "2026-03-04",
       does: "Values the large-cap AI names with a two-stage DCF, cross-checks against comparables, and shows how the answer moves across WACC and terminal growth.",
       stack: "Python · Streamlit · DCF and comparables",
@@ -810,7 +926,7 @@
       links: [["Source on GitHub", "https://github.com/ericpeck05/bubble-or-not"]]
     },
     {
-      id: "sitefinder", fig: "sitefinder", title: "Data center site finder",
+      id: "sitefinder", fig: "sitefinder", hue: "teal", title: "Data center site finder",
       cat: "investing", date: "2026-05-08",
       does: "Scores every parcel in Dane County for data center siting on size, slope, zoning and distance to a substation, then maps the winners.",
       stack: "Python · SpatiaLite · public county and USGS data",
@@ -818,7 +934,7 @@
       links: [["Source on GitHub", "https://github.com/ericpeck05/btm-site-finder"]]
     },
     {
-      id: "pipeline", fig: "pipeline", title: "Client reporting pipeline",
+      id: "pipeline", fig: "pipeline", hue: "amber", title: "Client reporting pipeline",
       cat: "client", date: null,
       does: "Reads a brokerage export and produces the portfolio review deck and its companion write-up in firm brand, turning an afternoon of formatting into a few minutes.",
       stack: "Python · python-pptx · python-docx",
@@ -896,7 +1012,7 @@
 
   FEATURED.forEach(function (p, i) {
     var sec = document.createElement("div");
-    sec.className = "featured rail reveal";
+    sec.className = "featured rail hue-" + p.hue;
     sec.id = "p-" + p.id;
 
     var lab = document.createElement("p");
@@ -927,6 +1043,7 @@
 
     col.className = "f-grid";
     var text = document.createElement("div");
+    text.className = "reveal";
     text.appendChild(h3);
     text.appendChild(does);
     text.appendChild(body);
@@ -941,8 +1058,12 @@
       text.appendChild(lw);
     }
 
+    var tile = document.createElement("div");
+    tile.className = "tile";
+    tile.appendChild(figure);
+
     col.appendChild(text);
-    col.appendChild(figure);
+    col.appendChild(tile);
 
     sec.appendChild(lab);
     sec.appendChild(col);
@@ -1124,29 +1245,94 @@
      SCROLL + REVEAL
      ========================================================= */
 
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
   var masthead = $("#masthead");
   var navLinks = Array.prototype.slice.call(document.querySelectorAll(".nav a"));
+  var heroInner = $("#hero-inner");
+  var tiles = Array.prototype.slice.call(document.querySelectorAll(".tile"));
+  var scrub = $("#scrub");
   var ticking = false;
+
+  function clamp01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
+
+  /* split the opening paragraph into words so it can ink in as it is read */
+  if (scrub && !reduce) {
+    var words = scrub.textContent.trim().split(/\s+/);
+    scrub.textContent = "";
+    words.forEach(function (w, i) {
+      var s = document.createElement("span");
+      s.className = "w";
+      s.style.setProperty("--w", i);
+      s.textContent = w;
+      scrub.appendChild(s);
+      scrub.appendChild(document.createTextNode(" "));
+    });
+    scrub.style.setProperty("--wn", words.length + 1);
+  }
 
   function onScroll() {
     if (ticking) return;
     ticking = true;
     window.requestAnimationFrame(function () {
       var y = window.scrollY || window.pageYOffset;
+      var vh = window.innerHeight;
       masthead.classList.toggle("is-stuck", y > 8);
+
       var here = "";
       navLinks.forEach(function (a) {
         var s = document.querySelector(a.getAttribute("href"));
         if (s && s.getBoundingClientRect().top <= 160) here = a.getAttribute("href");
       });
       navLinks.forEach(function (a) { a.classList.toggle("is-current", a.getAttribute("href") === here); });
+
+      if (!reduce) {
+        /* hero recedes over its own height */
+        if (heroInner) {
+          var hr = heroInner.getBoundingClientRect();
+          heroInner.style.setProperty("--hp", clamp01(-hr.top / (hr.height * 0.85)).toFixed(3));
+        }
+        /* tiles settle and their figures assemble between 92% and 38% of the viewport */
+        tiles.forEach(function (tile) {
+          var r = tile.getBoundingClientRect();
+          if (r.bottom < -200 || r.top > vh + 200) return;
+          tile.style.setProperty("--p", clamp01((vh * 0.92 - r.top) / (vh * 0.54)).toFixed(3));
+        });
+        /* opening paragraph inks in as it crosses the middle of the screen */
+        if (scrub) {
+          var sr = scrub.getBoundingClientRect();
+          scrub.style.setProperty("--tp", clamp01((vh * 0.86 - sr.top) / (vh * 0.42 + sr.height)).toFixed(3));
+        }
+      }
       ticking = false;
     });
   }
   window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll, { passive: true });
+  if (!reduce) tiles.forEach(function (tile) { tile.style.setProperty("--p", 0); });
   onScroll();
 
-  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  /* stagger the chart points */
+  dots.forEach(function (d, i) { d.style.setProperty("--d", (i * 70) + "ms"); });
+
+  /* numbers count up once, the first time they are seen */
+  function countUp(el) {
+    var to = +el.getAttribute("data-to"), suffix = el.getAttribute("data-suffix") || "";
+    if (reduce) { el.textContent = to + suffix; return; }
+    var t0 = null, dur = 1700;
+    el.classList.add("is-counting");
+    function step(ts) {
+      if (t0 === null) t0 = ts;
+      var k = Math.min(1, (ts - t0) / dur);
+      var e = 1 - Math.pow(1 - k, 3);
+      el.textContent = Math.round(to * e) + suffix;
+      if (k < 1) window.requestAnimationFrame(step);
+      else el.classList.remove("is-counting");
+    }
+    el.textContent = "0" + suffix;
+    window.requestAnimationFrame(step);
+  }
+
 
   if (!reduce && "IntersectionObserver" in window) {
     var io = new IntersectionObserver(function (es) {
@@ -1158,6 +1344,19 @@
       });
     }, { rootMargin: "0px 0px -6% 0px", threshold: 0.06 });
     document.querySelectorAll(".reveal").forEach(function (el) { io.observe(el); });
+
+    /* the numbers wait until the panel is properly on screen */
+    var statsEl = $("#stats");
+    if (statsEl) {
+      var so = new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          setTimeout(function () { statsEl.querySelectorAll(".stat-num").forEach(countUp); }, 200);
+          so.disconnect();
+        });
+      }, { threshold: 0.6 });
+      so.observe(statsEl);
+    }
   } else {
     document.querySelectorAll(".reveal").forEach(function (el) { el.classList.add("is-in"); });
   }
