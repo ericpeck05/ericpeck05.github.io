@@ -655,7 +655,7 @@
   <div class="stats reveal" id="stats" aria-label="By the numbers">
     <div class="stat"><span class="stat-num" data-to="9">9</span><span class="label">Builds shipped in 2026</span></div>
     <div class="stat"><span class="stat-num" data-to="8">8</span><span class="label">Open-source repositories</span></div>
-    <div class="stat"><span class="stat-num" data-to="60" data-suffix="k">60k</span><span class="label">Land parcels scored</span></div>
+    <div class="stat"><span class="stat-num" data-to="7277">7,277</span><span class="label">US companies screened per run</span></div>
     <div class="stat"><span class="stat-num" data-to="24">24</span><span class="label">Screen variants backtested</span></div>
   </div>
 
@@ -1318,14 +1318,15 @@
   /* numbers count up once, the first time they are seen */
   function countUp(el) {
     var to = +el.getAttribute("data-to"), suffix = el.getAttribute("data-suffix") || "";
-    if (reduce) { el.textContent = to + suffix; return; }
+    function fmt(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
+    if (reduce) { el.textContent = fmt(to) + suffix; return; }
     var t0 = null, dur = 1700;
     el.classList.add("is-counting");
     function step(ts) {
       if (t0 === null) t0 = ts;
       var k = Math.min(1, (ts - t0) / dur);
       var e = 1 - Math.pow(1 - k, 3);
-      el.textContent = Math.round(to * e) + suffix;
+      el.textContent = fmt(Math.round(to * e)) + suffix;
       if (k < 1) window.requestAnimationFrame(step);
       else el.classList.remove("is-counting");
     }
